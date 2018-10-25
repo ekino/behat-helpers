@@ -9,12 +9,12 @@ This library provides some helpers over Behat.
 This is a *work in progress*, so if you'd like something implemented please
 feel free to ask for it or contribute to help us!
 
-## Basic usage
+## Installation
 
 Require it using [Composer](https://getcomposer.org/):
 
 ```bash
-composer require --dev behat/helpers
+composer require --dev ekino/behat-helpers
 ```
 
 And use the helpers you need in your FeatureContext class.
