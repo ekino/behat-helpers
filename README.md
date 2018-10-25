@@ -1,5 +1,9 @@
 # Behat Helpers
 
+[![Latest Stable Version](https://poser.pugx.org/ekino/behat-helpers/v/stable)](https://packagist.org/packages/ekino/behat-helpers)
+[![Build Status](https://travis-ci.org/ekino/behat-helpers.svg?branch=master)](https://travis-ci.org/ekino/behat-helpers)
+[![Total Downloads](https://poser.pugx.org/ekino/behat-helpers/downloads)](https://packagist.org/packages/ekino/behat-helpers)
+
 This library provides some helpers over Behat.
 
 This is a *work in progress*, so if you'd like something implemented please
