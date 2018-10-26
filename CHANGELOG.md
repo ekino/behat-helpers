@@ -4,4 +4,4 @@ CHANGELOG
 master
 ------
 
-* todo
+* Allow symfony/stopwatch ^2.8
