@@ -205,6 +205,16 @@ Scenario: I can fill the step2
     Then I should be on "/step3"
 ```
 
+You can add the tag `behat_helpers_reset_cache` to clear cookies previously saved:
+
+```gherkin
+@behat_helpers_reset_cache
+Scenario: I am on /step1 if previous cookies are reset
+    Given I fill the second step
+    Then I should be on "/step3"
+    But I am on "/step1"
+```
+
 ### ReloadDatabaseTrait
 
 This trait allows you to restore the database at the end of a scenario as it

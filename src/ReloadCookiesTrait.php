@@ -83,7 +83,7 @@ trait ReloadCookiesTrait
             $this->resetCookies();
         }
 
-        if (!$this->cookiesReloaded && $cacheable) {
+        if (!$this->cookiesReloaded && !$reset && $cacheable) {
             $this->reloadCookies();
 
             $this->cookiesReloaded = true;
