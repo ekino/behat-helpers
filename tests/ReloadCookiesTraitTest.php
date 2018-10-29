@@ -30,6 +30,59 @@ class ReloadCookiesTraitTest extends TestCase
     use TestHelperTrait;
 
     /**
+     * Test the doOnce method.
+     *
+     * @param array $tags
+     * @param array $expectedCookies
+     * @param array $cookies
+     * @param array $expectedSteps
+     * @param array $steps
+     * @param int   $resetCounter
+     * @param int   $sessionCounter
+     * @param int   $driverCounter
+     *
+     * @dataProvider doOnceProvider
+     *
+     * @throws \ReflectionException
+     */
+    public function testDoOnce(array $tags, array $expectedCookies, array $cookies, array $expectedSteps, array $steps, int $resetCounter, int $sessionCounter, int $driverCounter)
+    {
+        $wdSession = $this->createMock(SessionMockInterface::class);
+        $wdSession->expects($this->exactly($resetCounter))->method('deleteAllCookies');
+
+        $driver = $this->createMock(Selenium2Driver::class);
+        $driver->expects($this->exactly($sessionCounter))->method('getWebDriverSession')->willReturn($wdSession);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->exactly($driverCounter))->method('getDriver')->willReturn($driver);
+
+        $mink = new Mink(['foo' => $session]);
+        $mink->setDefaultSessionName('foo');
+
+        $object = new ReloadCookiesFeatureContext();
+        $object->setMink($mink);
+        $this->setPrivatePropertyValue($object, 'tags', $tags);
+        $this->setPrivatePropertyValue($object, 'cookies', $cookies);
+        $this->setPrivatePropertyValue($object, 'steps', $steps);
+
+        $object->doOnce(function() {});
+
+        $this->assertSame($expectedCookies, $this->getPrivatePropertyValue($object, 'cookies'));
+        $this->assertSame($expectedSteps, $this->getPrivatePropertyValue($object, 'steps'));
+    }
+
+    /**
+     * @return \Generator
+     */
+    public function doOnceProvider()
+    {
+        yield [['behat_helpers_reset_cache'], [], ['cookie'], ['testDoOnce'], ['step'], 1, 1, 2];
+        yield [['behat_helpers_reset_cache', 'behat_helpers_no_cache'], [], ['cookie'], [], ['step'], 1, 1, 2];
+        yield [['behat_helpers_no_cache'], ['cookie'], ['cookie'], ['step'], ['step'], 0, 0, 0];
+        yield [[], ['cookie'], ['cookie'], ['step', 'testDoOnce'], ['step'], 0, 1, 2];
+    }
+
+    /**
      * Tests the resetCookies method.
      */
     public function testResetCookies(): void
