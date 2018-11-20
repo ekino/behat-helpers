@@ -123,7 +123,7 @@ Scenario: foo elt should be visible in 2 seconds or less
 
 ### ExtraWebAssertTrait
 
-todo
+This trait allows you to check if an element is present or not and interact with it. 
 
 ```php
 // your feature context

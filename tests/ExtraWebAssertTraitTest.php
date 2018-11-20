@@ -80,9 +80,91 @@ class ExtraWebAssertTraitTest extends TestCase
     }
 
     /**
+     * Tests the method iWaitForCssElementBeingVisible.
+     */
+    public function testIWaitForCssElementBeingVisible()
+    {
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('spin');
+
+        $mock->iWaitForCssElementBeingVisible('foo');
+    }
+
+    /**
+     * Tests the method iWaitForCssElementBeingInvisible.
+     */
+    public function testIWaitForCssElementBeingInvisible()
+    {
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('spin');
+
+        $mock->iWaitForCssElementBeingInvisible('foo');
+    }
+
+    /**
+     * Tests the method iWaitForPageNotContains.
+     */
+    public function testIWaitForPageNotContains()
+    {
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('spin');
+
+        $mock->iWaitForPageNotContains('foo');
+    }
+
+    /**
+     * Tests the method spin.
+     */
+    public function testSpin()
+    {
+        $mock = $this->getExtraWebAssertMockWithoutProtectedMethods();
+
+        $method = new \ReflectionMethod(get_class($mock), 'spin');
+        $method->setAccessible(true);
+
+        $method->invokeArgs($mock, [function ($mock) { return true; }, 'message', 1]);
+    }
+
+    /**
+     * Tests the method spin.
+     *
+     * @expectedException \Behat\Mink\Exception\ExpectationException
+     * @expectedExceptionMessage Spin function timed out after 1 seconds: message
+     */
+    public function testSpinThrowsException()
+    {
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
+
+        $mock = $this->getExtraWebAssertMockWithoutProtectedMethods();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $method = new \ReflectionMethod(get_class($mock), 'spin');
+        $method->setAccessible(true);
+
+        $method->invokeArgs($mock , [function ($mock) { throw new \Exception(); }, 'message', 1]);
+    }
+
+    /**
      * @return \PHPUnit_Framework_MockObject_MockObject
      */
     private function getExtraWebAssertMock()
+    {
+        return $this->getMockForTrait(
+            ExtraWebAssertTrait::class,
+            [],
+            '',
+            true,
+            true,
+            true,
+            ['assertSession', 'fixStepArgument', 'getSession', 'spin']
+        );
+    }
+
+    /**
+     * @return \PHPUnit_Framework_MockObject_MockObject
+     */
+    private function getExtraWebAssertMockWithoutProtectedMethods()
     {
         return $this->getMockForTrait(
             ExtraWebAssertTrait::class,
