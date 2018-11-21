@@ -81,6 +81,171 @@ class ExtraWebAssertTraitTest extends TestCase
     }
 
     /**
+     * Tests the assertAtLeastNumElements method.
+     */
+    public function testAssertAtLeastNumElements(): void
+    {
+        $element = $this->createMock(NodeElement::class);
+
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element, $element]);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $mock->assertAtLeastNumElements(2, '.foo');
+    }
+
+    /**
+     * Tests the assertAtLeastNumElements method.
+     */
+    public function testAssertAtLeastNumElementsExactly(): void
+    {
+        $element = $this->createMock(NodeElement::class);
+
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element]);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $mock->assertAtLeastNumElements(2, '.foo');
+    }
+
+    /**
+     * Tests the assertAtLeastNumElements method.
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage 1 ".foo" found on the page, but should at least 2.
+     */
+    public function testAssertAtLeastNumElementsNotEnough(): void
+    {
+        $element = $this->createMock(NodeElement::class);
+
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn($element);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $mock->assertAtLeastNumElements(2, '.foo');
+    }
+
+    /**
+     * Tests the assertElementVisible method.
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage Element matching css ".foo" not found.
+     */
+    public function testAssertAtLeastNumElementsThrowsExceptionIfElementNotFound(): void
+    {
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'));
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+        $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+
+        $mock->assertAtLeastNumElements(2, '.foo');
+    }
+
+    /**
+     * Tests the assertExactlyNumElement method.
+     */
+    public function testAssertExactlyNumElement(): void
+    {
+        $element = $this->createMock(NodeElement::class);
+
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element]);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $mock->assertExactlyNumElement(2, '.foo');
+    }
+
+    /**
+     * Tests the assertExactlyNumElement method.
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage 1 ".foo" found on the page, but should find 2.
+     */
+    public function testAssertExactlyNumElementNotEnough(): void
+    {
+        $element = $this->createMock(NodeElement::class);
+
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn($element);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $mock->assertExactlyNumElement(2, '.foo');
+    }
+
+    /**
+     * Tests the assertExactlyNumElement method.
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage 3 ".foo" found on the page, but should find 2.
+     */
+    public function testAssertExactlyNumElementTooMuch(): void
+    {
+        $element = $this->createMock(NodeElement::class);
+
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element, $element]);
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $mock->assertExactlyNumElement(2, '.foo');
+    }
+
+    /**
+     * Tests the assertExactlyNumElement method.
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage Element matching css ".foo" not found.
+     */
+    public function testAssertExactlyNumElementThrowsExceptionIfElementNotFound(): void
+    {
+        $page = $this->createMock(DocumentElement::class);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'));
+
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())->method('getPage')->willReturn($page);
+        $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
+
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+
+        $mock->assertExactlyNumElement(2, '.foo');
+    }
+
+    /**
      * @return MockObject
      */
     private function getExtraWebAssertMock(): MockObject

@@ -15,10 +15,13 @@ use Behat\Mink\Exception\ElementNotFoundException;
 
 /**
  * @author Rémi Marseille <remi.marseille@ekino.com>
+ * @author Benoit de Jacobet <benoit.de-jacobet@ekino.com>
  */
 trait ExtraWebAssertTrait
 {
     /**
+     * Checks element has a specific attribute
+     *
      * @Then /^the "(?P<element>[^"]*)" element should have attribute "(?P<value>(?:[^"]|\\")*)"$/
      *
      * @param string $element
@@ -45,5 +48,61 @@ trait ExtraWebAssertTrait
         }
 
         $nodeElement->click();
+    }
+
+    /**
+     * Checks at least X CSS elements exist on the page
+     *
+     * @Then /^(?:|I )should see at least (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
+     *
+     * @param int $num
+     * @param     $selector
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws \Exception
+     */
+    public function assertAtLeastNumElements($num, $selector): void
+    {
+        $elements = $this->getSession()->getPage()->find('css', $selector);
+
+        if (null === $elements) {
+            throw new ElementNotFoundException($this->getSession()->getDriver(), 'element', 'css', $selector);
+        }
+
+        if (!\is_array($elements)) {
+            $elements = [$elements];
+        }
+
+        if (\intval($num) > \count($elements)) {
+            throw new \Exception(sprintf('%d "%s" found on the page, but should at least %d.', \count($elements), $selector, $num));
+        }
+    }
+
+    /**
+     * Checks exactly X CSS element exists on the page
+     *
+     * @Then /^(?:|I )should see exactly (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
+     *
+     * @param int    $num
+     * @param string $selector
+     *
+     * @throws \Behat\Mink\Exception\ElementNotFoundException
+     * @throws \Exception
+     */
+    public function assertExactlyNumElement($num, $selector): void
+    {
+        $elements = $this->getSession()->getPage()->find('css', $selector);
+
+        if (null === $elements) {
+            throw new ElementNotFoundException($this->getSession()->getDriver(), 'element', 'css', $selector);
+        }
+
+        if (!\is_array($elements)) {
+            $elements = [$elements];
+        }
+
+        if (\count($elements) !== \intval($num)) {
+            throw new \Exception(sprintf('%d "%s" found on the page, but should find %d.', \count($elements), $selector, $num));
+        }
     }
 }

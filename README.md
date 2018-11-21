@@ -123,7 +123,7 @@ Scenario: foo elt should be visible in 2 seconds or less
 
 ### ExtraWebAssertTrait
 
-todo
+This trait provides some extra asserts.
 
 ```php
 // your feature context
