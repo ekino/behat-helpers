@@ -43,13 +43,17 @@ trait ExtraSessionTrait
      * @param string $element
      * @param int    $seconds
      *
-     * @return bool
+     * @throws \RuntimeException
      *
      * @Given /^I wait for "([^"]*)" element being visible for (\d+) seconds$/
      */
     public function iWaitForCssElementBeingVisible($element, $seconds)
     {
-        return $this->getSession()->wait($seconds * 1000, sprintf("$('%s').length >= 1", $element));
+        $result = $this->getSession()->wait($seconds * 1000, sprintf("$('%s').length >= 1", $element));
+
+        if (!$result) {
+            throw new \RuntimeException(sprintf('Element "%s" not found', $element));
+        }
     }
 
     /**
@@ -58,13 +62,17 @@ trait ExtraSessionTrait
      * @param string $element
      * @param int    $seconds
      *
-     * @return bool
+     * @throws \RuntimeException
      *
      * @Given /^I wait for "([^"]*)" element being invisible for (\d+) seconds$/
      */
     public function iWaitForCssElementBeingInvisible($element, $seconds)
     {
-        return $this->getSession()->wait($seconds * 1000, sprintf("$('%s').length == false", $element));
+        $result = $this->getSession()->wait($seconds * 1000, sprintf("$('%s').length == false", $element));
+
+        if (!$result) {
+            throw new \RuntimeException(sprintf('Element "%s" did not disappear', $element));
+        }
     }
 
     /**

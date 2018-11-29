@@ -57,12 +57,34 @@ class ExtraSessionTraitTest extends TestCase
     public function testIWaitForCssElementBeingVisible()
     {
         $session = $this->createMock(Session::class);
-        $session->expects($this->once())->method('wait')->with($this->equalTo(1000), $this->equalTo("$('foo').length >= 1"))->willReturn(true);
+        $session->expects($this->once())
+            ->method('wait')
+            ->with($this->equalTo(2000), $this->equalTo("$('foo').length >= 1"))
+            ->willReturn(true)
+        ;
 
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $mock->iWaitForCssElementBeingVisible('foo', 2);
+    }
 
-        $this->assertTrue($mock->iWaitForCssElementBeingVisible('foo', 1));
+    /**
+     * Tests the iWaitForCssElementBeingVisible FAIL method.
+     *
+     * @expectedException \RuntimeException
+     */
+    public function testIWaitForCssElementBeingVisibleFail()
+    {
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())
+            ->method('wait')
+            ->with($this->equalTo(2000), $this->equalTo("$('foo').length >= 1"))
+            ->willReturn(false)
+        ;
+
+        $mock = $this->getExtraSessionMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $mock->iWaitForCssElementBeingVisible('foo', 2);
     }
 
     /**
@@ -71,12 +93,34 @@ class ExtraSessionTraitTest extends TestCase
     public function testIWaitForCssElementBeingInvisible()
     {
         $session = $this->createMock(Session::class);
-        $session->expects($this->once())->method('wait')->with($this->equalTo(1000), $this->equalTo("$('foo').length == false"))->willReturn(true);
+        $session->expects($this->once())
+            ->method('wait')
+            ->with($this->equalTo(2000), $this->equalTo("$('foo').length == false"))
+            ->willReturn(true)
+        ;
 
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $mock->iWaitForCssElementBeingInvisible('foo', 2);
+    }
 
-        $this->assertTrue($mock->iWaitForCssElementBeingInvisible('foo', 1));
+    /**
+     * Tests the iWaitForCssElementBeingInvisible FAIL method.
+     *
+     * @expectedException \RuntimeException
+     */
+    public function testIWaitForCssElementBeingInvisibleFail()
+    {
+        $session = $this->createMock(Session::class);
+        $session->expects($this->once())
+            ->method('wait')
+            ->with($this->equalTo(2000), $this->equalTo("$('foo').length == false"))
+            ->willReturn(false)
+        ;
+
+        $mock = $this->getExtraSessionMock();
+        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $mock->iWaitForCssElementBeingInvisible('foo', 2);
     }
 
     /**
