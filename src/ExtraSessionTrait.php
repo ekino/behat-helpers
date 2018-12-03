@@ -68,7 +68,7 @@ trait ExtraSessionTrait
      */
     public function iWaitForCssElementBeingInvisible($element, $seconds)
     {
-        $result = $this->getSession()->wait($seconds * 1000, sprintf('$("%1$s").length == false && $("%1$s").css("display") == "none"', $element));
+        $result = $this->getSession()->wait($seconds * 1000, sprintf('$("%1$s").length == false || $("%1$s").css("display") == "none"', $element));
 
         if (!$result) {
             throw new \RuntimeException(sprintf('Element "%s" did not disappear', $element));

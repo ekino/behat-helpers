@@ -95,7 +95,7 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
             ->method('wait')
-            ->with($this->equalTo(2000), $this->equalTo('$("foo").length == false && $("foo").css("display") == "none"'))
+            ->with($this->equalTo(2000), $this->equalTo('$("foo").length == false || $("foo").css("display") == "none"'))
             ->willReturn(true)
         ;
 
@@ -114,7 +114,7 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
             ->method('wait')
-            ->with($this->equalTo(2000), $this->equalTo('$("foo").length == false && $("foo").css("display") == "none"'))
+            ->with($this->equalTo(2000), $this->equalTo('$("foo").length == false || $("foo").css("display") == "none"'))
             ->willReturn(false)
         ;
 
