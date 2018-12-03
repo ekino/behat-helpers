@@ -49,7 +49,7 @@ trait ExtraSessionTrait
      */
     public function iWaitForCssElementBeingVisible($element, $seconds)
     {
-        $result = $this->getSession()->wait($seconds * 1000, sprintf("$('%s').length >= 1", $element));
+        $result = $this->getSession()->wait($seconds * 1000, sprintf('$("%1$s").length >= 1 && $("%1$s").css("display") != "none"', $element));
 
         if (!$result) {
             throw new \RuntimeException(sprintf('Element "%s" not found', $element));
@@ -68,7 +68,7 @@ trait ExtraSessionTrait
      */
     public function iWaitForCssElementBeingInvisible($element, $seconds)
     {
-        $result = $this->getSession()->wait($seconds * 1000, sprintf("$('%s').length == false", $element));
+        $result = $this->getSession()->wait($seconds * 1000, sprintf('$("%1$s").length == false && $("%1$s").css("display") == "none"', $element));
 
         if (!$result) {
             throw new \RuntimeException(sprintf('Element "%s" did not disappear', $element));
