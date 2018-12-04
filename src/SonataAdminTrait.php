@@ -130,7 +130,7 @@ trait SonataAdminTrait
         }
 
         $this->clickElement($element);
-        $this->iWaitForCssElementBeingVisible('body > .modal .modal-title', 5);
+        $this->iWaitForCssElementBeingVisible('.modal', 5);
     }
 
     /**
@@ -147,13 +147,8 @@ trait SonataAdminTrait
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
-        $invisible = $this->iWaitForCssElementBeingInvisible('body > .modal > .modal-dialog', 5);
-
-        if (!$invisible) {
-            $element = $this->getSession()->getPage()->find('css', 'body > .modal > .modal-dialog');
-
-            throw new ElementHtmlException('Popin .modal-dialog was found and opened', $this->getSession()->getDriver(), $element);
-        }
+        $this->iWaitForCssElementBeingInvisible('.modal', 5);
+        $this->thePopinShouldNotBeOpened();
     }
 
     /**
@@ -165,10 +160,10 @@ trait SonataAdminTrait
      */
     public function thePopinShouldNotBeOpened()
     {
-        $element = $this->getSession()->getPage()->find('css', 'body > .modal > .modal-dialog');
+        $element = $this->getSession()->getPage()->find('css', '.modal');
 
         if ($element && $element->isVisible()) {
-            throw new ElementHtmlException('Popin .modal-dialog was found and opened', $this->getSession()->getDriver(), $element);
+            throw new ElementHtmlException('Popin .modal was found and opened', $this->getSession()->getDriver(), $element);
         }
     }
 
@@ -181,10 +176,10 @@ trait SonataAdminTrait
      */
     public function thePopinShouldBeOpened()
     {
-        $element = $this->getSession()->getPage()->find('css', 'body > .modal > .modal-dialog');
+        $element = $this->getSession()->getPage()->find('css', '.modal');
 
         if (!$element || !$element->isVisible()) {
-            throw new ElementNotVisible('Modal .modal-dialog should be opened and visible');
+            throw new ElementNotVisible('Modal .modal should be opened and visible');
         }
     }
 
