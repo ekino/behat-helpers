@@ -74,8 +74,8 @@ trait ReloadCookiesTrait
      */
     public function doOnce(callable $callback)
     {
-        $reset     = in_array('behat_helpers_reset_cache', $this->tags);
-        $cacheable = !in_array('behat_helpers_no_cache', $this->tags);
+        $reset     = \in_array('behat_helpers_reset_cache', $this->tags);
+        $cacheable = !\in_array('behat_helpers_no_cache', $this->tags);
         $bt        = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS, 2);
         $caller    = $bt[1]['function'];
 
@@ -90,15 +90,15 @@ trait ReloadCookiesTrait
         }
 
         if ($cacheable) {
-            if (!in_array($caller, static::$steps)) {
-                call_user_func($callback);
+            if (!\in_array($caller, static::$steps)) {
+                \call_user_func($callback);
 
                 static::$steps[] = $caller;
 
                 $this->saveCookies = true;
             }
         } else {
-            call_user_func($callback);
+            \call_user_func($callback);
         }
     }
 

@@ -27,7 +27,7 @@ trait RouterAwareTrait
      */
     public function locatePath($path)
     {
-        if (!in_array(KernelDictionary::class, class_uses($this))) {
+        if (!\in_array(KernelDictionary::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', KernelDictionary::class, __CLASS__));
         }
 
