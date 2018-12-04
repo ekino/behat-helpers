@@ -67,7 +67,7 @@ trait SonataAdminTrait
     {
         $element = $this->getNavbarActionElement($text);
 
-        if (is_null($element)) {
+        if (\is_null($element)) {
             throw new ElementNotFoundException($this->getSession()->getDriver(), null, 'text', $text);
         }
 
@@ -89,7 +89,7 @@ trait SonataAdminTrait
     {
         $element = $this->getNavbarActionElement($text);
 
-        if (!is_null($element)) {
+        if (!\is_null($element)) {
             throw new ElementHtmlException(sprintf('Action "%s" has been found in Navbar action', $text), $this->getSession()->getDriver(), $element);
         }
     }
@@ -107,7 +107,7 @@ trait SonataAdminTrait
     {
         $element = $this->getNavbarActionElement($text);
 
-        if (is_null($element)) {
+        if (\is_null($element)) {
             throw new ElementNotFoundException($this->getSession()->getDriver(), null, 'text', $text);
         }
 
@@ -125,7 +125,7 @@ trait SonataAdminTrait
      */
     public function clickingOnElementShouldOpenPopin($element)
     {
-        if (!in_array(ExtraSessionTrait::class, class_uses($this))) {
+        if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
@@ -143,7 +143,7 @@ trait SonataAdminTrait
      */
     public function thePopinShouldBeClosed()
     {
-        if (!in_array(ExtraSessionTrait::class, class_uses($this))) {
+        if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
