@@ -117,69 +117,78 @@ trait SonataAdminTrait
     /**
      * Check the clicking on the element opens a popin.
      *
-     * @Given /^clicking on the "([^"]*)" element should open a popin$/
+     * @Given /^clicking on the "([^"]*)" element should open a popin "([^"]*)"$/
      *
      * @param string $element
+     * @param string $popinIdEnding
      *
      * @throws \RuntimeException
      */
-    public function clickingOnElementShouldOpenPopin($element)
+    public function clickingOnElementShouldOpenPopin($element, $popinIdEnding)
     {
         if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
         $this->clickElement($element);
-        $this->iWaitForCssElementBeingVisible('.modal', 5);
+        $this->iWaitForCssElementBeingVisible(sprintf('[id$=%s].modal', $popinIdEnding), 5);
     }
 
     /**
      * Check if the popin is closed.
      *
-     * @Then /^the popin should be closed$/
+     * @Then /^the popin "([^"]*)" should be closed$/
+     *
+     * @param string $popinIdEnding
      *
      * @throws \RuntimeException
      * @throws ElementHtmlException
      */
-    public function thePopinShouldBeClosed()
+    public function thePopinShouldBeClosed($popinIdEnding)
     {
         if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
-        $this->iWaitForCssElementBeingInvisible('.modal', 5);
-        $this->thePopinShouldNotBeOpened();
+        $this->iWaitForCssElementBeingInvisible(sprintf('[id$=%s].modal', $popinIdEnding), 5);
+        $this->thePopinShouldNotBeOpened($popinIdEnding);
     }
 
     /**
      * Check if the popin is not opened.
      *
-     * @Then /^the popin should not be opened$/
+     * @Then /^the popin "([^"]*)" should not be opened$/
+     *
+     * @param string $popinIdEnding
      *
      * @throws ElementHtmlException
      */
-    public function thePopinShouldNotBeOpened()
+    public function thePopinShouldNotBeOpened($popinIdEnding)
     {
-        $element = $this->getSession()->getPage()->find('css', '.modal');
+        $popinAccurateSelector = sprintf('div.modal[id$=%s]', $popinIdEnding);
+        $element               = $this->getSession()->getPage()->find('css', $popinAccurateSelector);
 
         if ($element && $element->isVisible()) {
-            throw new ElementHtmlException('Popin .modal was found and opened', $this->getSession()->getDriver(), $element);
+            throw new ElementHtmlException(sprintf('Popin %s was found and opened', $popinAccurateSelector), $this->getSession()->getDriver(), $element);
         }
     }
 
     /**
      * Check if the popin is opened.
      *
-     * @Then /^the popin should be opened$/
+     * @Then /^the popin "([^"]*)" should be opened$/
+     *
+     * @param string $popinIdEnding
      *
      * @throws ElementNotVisible
      */
-    public function thePopinShouldBeOpened()
+    public function thePopinShouldBeOpened($popinIdEnding)
     {
-        $element = $this->getSession()->getPage()->find('css', '.modal');
+        $popinAccurateSelector = sprintf('div.modal[id$=%s]', $popinIdEnding);
+        $element               = $this->getSession()->getPage()->find('css', $popinAccurateSelector);
 
         if (!$element || !$element->isVisible()) {
-            throw new ElementNotVisible('Modal .modal should be opened and visible');
+            throw new ElementNotVisible(sprintf('Modal %s should be opened and visible', $popinAccurateSelector));
         }
     }
 
