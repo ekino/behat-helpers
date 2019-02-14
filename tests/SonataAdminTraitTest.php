@@ -190,7 +190,7 @@ class SonataAdminTraitTest extends TestCase
     public function testClickingOnElementShouldOpenPopinWithoutExtraSessionTraitUse()
     {
         $mock = $this->getSonataAdminMock();
-        $mock->clickingOnElementShouldOpenPopin('foo');
+        $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
     }
 
     /**
@@ -202,14 +202,14 @@ class SonataAdminTraitTest extends TestCase
     public function testThePopinShouldBeClosedWithoutExtraSessionTraitUse()
     {
         $mock = $this->getSonataAdminMock();
-        $mock->clickingOnElementShouldOpenPopin('foo');
+        $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
     }
 
     /**
      * Tests the thePopinShouldNotBeOpened method with element found and visible.
      *
      * @expectedException Behat\Mink\Exception\ElementHtmlException
-     * @expectedExceptionMessage Popin .modal was found and opened
+     * @expectedExceptionMessage Popin div.modal[id$=foo] was found and opened
      */
     public function testThePopinShouldNotBeOpenedWithOpenedPopin()
     {
@@ -220,12 +220,12 @@ class SonataAdminTraitTest extends TestCase
         $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(true);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.modal'))->willReturn($element);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn($element);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
-        $mock->thePopinShouldNotBeOpened();
+        $mock->thePopinShouldNotBeOpened('foo');
     }
 
     /**
@@ -237,11 +237,11 @@ class SonataAdminTraitTest extends TestCase
         $page    = $this->createMock(DocumentElement::class);
         $mock    = $this->getSonataAdminMock();
 
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.modal'))->willReturn(null);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn(null);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->thePopinShouldNotBeOpened();
+        $mock->thePopinShouldNotBeOpened('foo');
     }
 
     /**
@@ -255,18 +255,18 @@ class SonataAdminTraitTest extends TestCase
         $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(true);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.modal'))->willReturn($element);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn($element);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->thePopinShouldBeOpened();
+        $mock->thePopinShouldBeOpened('foo');
     }
 
     /**
      * Tests the thePopinShouldBeOpened method with element found and invisible.
      *
      * @expectedException WebDriver\Exception\ElementNotVisible
-     * @expectedExceptionMessage Modal .modal should be opened and visible
+     * @expectedExceptionMessage Modal div.modal[id$=foo] should be opened and visible
      */
     public function testThePopinShouldBeOpenedWithInvisiblePopin()
     {
@@ -276,18 +276,18 @@ class SonataAdminTraitTest extends TestCase
         $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(false);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.modal'))->willReturn($element);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn($element);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->thePopinShouldBeOpened();
+        $mock->thePopinShouldBeOpened('foo');
     }
 
     /**
      * Tests the thePopinShouldBeOpened method without element found.
      *
      * @expectedException WebDriver\Exception\ElementNotVisible
-     * @expectedExceptionMessage Modal .modal should be opened and visible
+     * @expectedExceptionMessage Modal div.modal[id$=foo] should be opened and visible
      */
     public function testThePopinShouldBeOpenedWithoutPopin()
     {
@@ -295,11 +295,11 @@ class SonataAdminTraitTest extends TestCase
         $page    = $this->createMock(DocumentElement::class);
         $mock    = $this->getSonataAdminMock();
 
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.modal'))->willReturn(null);
+        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn(null);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->thePopinShouldBeOpened();
+        $mock->thePopinShouldBeOpened('foo');
     }
 
     /**
