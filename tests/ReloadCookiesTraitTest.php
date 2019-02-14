@@ -32,7 +32,7 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * Tests the resetCookies method.
      */
-    public function testResetCookies()
+    public function testResetCookies(): void
     {
         $wdSession = $this->createMock(SessionMockInterface::class);
         $wdSession->expects($this->once())->method('deleteAllCookies');
@@ -65,7 +65,7 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * Tests the resetCookies method.
      */
-    public function testResetCookiesWithoutCookies()
+    public function testResetCookiesWithoutCookies(): void
     {
         $wdSession = $this->createMock(SessionMockInterface::class);
         $wdSession->expects($this->never())->method('deleteAllCookies');
@@ -98,7 +98,7 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * Tests the reloadCookies method.
      */
-    public function testReloadCookies()
+    public function testReloadCookies(): void
     {
         $wdSession = $this->createMock(SessionMockInterface::class);
         $wdSession->expects($this->exactly(2))->method('setCookie');
@@ -129,7 +129,7 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * Tests the reloadCookies method.
      */
-    public function testReloadCookiesWithoutCookies()
+    public function testReloadCookiesWithoutCookies(): void
     {
         $wdSession = $this->createMock(SessionMockInterface::class);
         $wdSession->expects($this->never())->method('setCookie');
@@ -153,7 +153,7 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * Tests the assertDriverSupported method.
      */
-    public function testAssertDriverSupported()
+    public function testAssertDriverSupported(): void
     {
         $driver = $this->createMock(Selenium2Driver::class);
 
@@ -172,7 +172,7 @@ class ReloadCookiesTraitTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Saving cookies only works with driver Behat\Mink\Driver\Selenium2Driver
      */
-    public function testAssertDriverSupportedWithException()
+    public function testAssertDriverSupportedWithException(): void
     {
         $driver = $this->createMock(CoreDriver::class);
 

@@ -22,7 +22,7 @@ trait ExtraSessionTrait
     /**
      * @BeforeScenario
      */
-    public function maximizeWindowOnBeforeScenario()
+    public function maximizeWindowOnBeforeScenario(): void
     {
         $this->getSession()->getDriver()->maximizeWindow();
     }
@@ -32,7 +32,7 @@ trait ExtraSessionTrait
      *
      * @param int $seconds
      */
-    public function waitForSeconds($seconds)
+    public function waitForSeconds(int $seconds): void
     {
         $this->getSession()->wait($seconds * 1000);
     }
@@ -47,7 +47,7 @@ trait ExtraSessionTrait
      *
      * @Given /^I wait for "([^"]*)" element being visible for (\d+) seconds$/
      */
-    public function iWaitForCssElementBeingVisible($element, $seconds)
+    public function iWaitForCssElementBeingVisible(string $element, int $seconds): void
     {
         $result = $this->getSession()->wait($seconds * 1000, sprintf('$("%1$s").length >= 1 && $("%1$s").css("display") != "none"', $element));
 
@@ -66,7 +66,7 @@ trait ExtraSessionTrait
      *
      * @Given /^I wait for "([^"]*)" element being invisible for (\d+) seconds$/
      */
-    public function iWaitForCssElementBeingInvisible($element, $seconds)
+    public function iWaitForCssElementBeingInvisible(string $element, int $seconds): void
     {
         $result = $this->getSession()->wait($seconds * 1000, sprintf('$("%1$s").length == false || $("%1$s").css("display") == "none"', $element));
 
@@ -81,7 +81,7 @@ trait ExtraSessionTrait
      * @param int $x
      * @param int $y
      */
-    public function scrollTo($x, $y)
+    public function scrollTo(int $x, int $y): void
     {
         $this->getSession()->executeScript("(function(){window.scrollTo($x, $y);})();");
     }

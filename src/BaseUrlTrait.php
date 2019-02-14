@@ -29,7 +29,7 @@ trait BaseUrlTrait
      *
      * @return self
      */
-    public function setBaseUrl($baseUrl)
+    public function setBaseUrl(string $baseUrl): self
     {
         $this->baseUrl = $baseUrl;
 
@@ -41,7 +41,7 @@ trait BaseUrlTrait
      *
      * @param BeforeScenarioScope $scope
      */
-    public function setBaseUrlBeforeScenario(BeforeScenarioScope $scope)
+    public function setBaseUrlBeforeScenario(BeforeScenarioScope $scope): void
     {
         foreach ($scope->getEnvironment()->getContexts() as $context) {
             if ($context instanceof RawMinkContext) {

@@ -25,7 +25,7 @@ trait SonataAdminTrait
      * @param string $username
      * @param string $password
      */
-    public function login($username, $password)
+    public function login(string $username, string $password): void
     {
         $this->visitPath('sonata_user_admin_security_login');
         $this->fillField('_username', $username);
@@ -42,7 +42,7 @@ trait SonataAdminTrait
      *
      * @throws ElementNotFoundException
      */
-    public function iOpenMenuItemByText($text)
+    public function iOpenMenuItemByText(string $text): void
     {
         $element = $this->getSession()->getPage()->find('xpath', '//aside//span[text()="'.$text.'"]');
 
@@ -63,7 +63,7 @@ trait SonataAdminTrait
      * @throws ElementNotFoundException
      * @throws ElementNotVisible
      */
-    public function iShouldSeeActionInNavbar($text)
+    public function iShouldSeeActionInNavbar(string $text): void
     {
         $element = $this->getNavbarActionElement($text);
 
@@ -85,7 +85,7 @@ trait SonataAdminTrait
      *
      * @throws ElementHtmlException
      */
-    public function iShouldNotSeeActionInNavbar($text)
+    public function iShouldNotSeeActionInNavbar(string $text): void
     {
         $element = $this->getNavbarActionElement($text);
 
@@ -103,7 +103,7 @@ trait SonataAdminTrait
      *
      * @throws ElementNotFoundException
      */
-    public function iClickOnActionInNavbar($text)
+    public function iClickOnActionInNavbar(string $text): void
     {
         $element = $this->getNavbarActionElement($text);
 
@@ -124,7 +124,7 @@ trait SonataAdminTrait
      *
      * @throws \RuntimeException
      */
-    public function clickingOnElementShouldOpenPopin($element, $popinIdEnding)
+    public function clickingOnElementShouldOpenPopin(string $element, string $popinIdEnding): void
     {
         if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
@@ -144,7 +144,7 @@ trait SonataAdminTrait
      * @throws \RuntimeException
      * @throws ElementHtmlException
      */
-    public function thePopinShouldBeClosed($popinIdEnding)
+    public function thePopinShouldBeClosed(string $popinIdEnding): void
     {
         if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
@@ -163,7 +163,7 @@ trait SonataAdminTrait
      *
      * @throws ElementHtmlException
      */
-    public function thePopinShouldNotBeOpened($popinIdEnding)
+    public function thePopinShouldNotBeOpened(string $popinIdEnding): void
     {
         $popinAccurateSelector = sprintf('div.modal[id$=%s]', $popinIdEnding);
         $element               = $this->getSession()->getPage()->find('css', $popinAccurateSelector);
@@ -182,7 +182,7 @@ trait SonataAdminTrait
      *
      * @throws ElementNotVisible
      */
-    public function thePopinShouldBeOpened($popinIdEnding)
+    public function thePopinShouldBeOpened(string $popinIdEnding): void
     {
         $popinAccurateSelector = sprintf('div.modal[id$=%s]', $popinIdEnding);
         $element               = $this->getSession()->getPage()->find('css', $popinAccurateSelector);
@@ -197,12 +197,12 @@ trait SonataAdminTrait
      *
      * @return NodeElement|null
      */
-    protected function getNavbarActionElement($text)
+    protected function getNavbarActionElement(string $text): ?NodeElement
     {
         return $this->getSession()->getPage()->find('xpath', '//nav//a[contains(.,"'.$text.'")]');
     }
 
-    /**
+    /**string
      * Fills in Select2 field with specified
      *
      * @When /^(?:|I )set the select2 field "(?P<field>(?:[^"]|\\")*)" to "(?P<textValues>(?:[^"]|\\")*)"$/
@@ -211,7 +211,7 @@ trait SonataAdminTrait
      * @param string $field
      * @param string $textValues
      */
-    public function iFillInSelect2Field($field, $textValues)
+    public function iFillInSelect2Field(string $field, string $textValues): void
     {
         $page   = $this->getSession()->getPage();
         $values = [];

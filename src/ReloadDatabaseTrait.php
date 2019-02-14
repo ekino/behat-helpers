@@ -35,7 +35,7 @@ trait ReloadDatabaseTrait
      *
      * @throws \RuntimeException
      */
-    public function dumpDatabaseOnBeforeScenario(BeforeScenarioScope $scope)
+    public function dumpDatabaseOnBeforeScenario(BeforeScenarioScope $scope): void
     {
         $tags = array_merge($scope->getFeature()->getTags(), $scope->getScenario()->getTags());
 
@@ -88,7 +88,7 @@ trait ReloadDatabaseTrait
      *
      * @throws \RuntimeException
      */
-    public function restoreDatabaseAfterScenario(AfterScenarioScope $scope)
+    public function restoreDatabaseAfterScenario(AfterScenarioScope $scope): void
     {
         if (!$this->databaseDump) {
             return;

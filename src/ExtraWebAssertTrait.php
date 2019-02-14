@@ -24,7 +24,7 @@ trait ExtraWebAssertTrait
      * @param string $element
      * @param string $value
      */
-    public function assertElementAttributeExists($element, $value)
+    public function assertElementAttributeExists(string $element, string $value): void
     {
         $this->assertSession()->elementAttributeExists('css', $element, $this->fixStepArgument($value));
     }
@@ -36,7 +36,7 @@ trait ExtraWebAssertTrait
      *
      * @throws ElementNotFoundException
      */
-    public function clickElement($element)
+    public function clickElement(string $element): void
     {
         $nodeElement = $this->getSession()->getPage()->find('css', $element);
 
