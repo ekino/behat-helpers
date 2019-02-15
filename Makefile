@@ -1,4 +1,4 @@
-.PHONY: app-composer-validate app-cs-check app-cs-fix app-install app-security-check app-test app-test-with-code-coverage
+.PHONY: app-composer-validate app-cs-check app-cs-fix app-install app-security-check app-static-analysis app-test app-test-with-code-coverage
 
 default: help
 
@@ -19,6 +19,9 @@ app-install: ## to install app
 
 app-security-check: ## to check if any security issues in the PHP dependencies
 	vendor/bin/security-checker security:check
+
+app-static-analysis: ## to run static analysis
+	vendor/bin/phpstan analyze --memory-limit=-1 src tests -l 7
 
 app-test: ## to run unit tests
 	vendor/bin/phpunit

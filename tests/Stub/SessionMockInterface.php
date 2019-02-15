@@ -19,7 +19,7 @@ namespace Tests\Ekino\BehatHelpers\Stub;
 interface SessionMockInterface
 {
     /**
-     * @param $cookie
+     * @param string $cookie
      *
      * @return mixed
      */

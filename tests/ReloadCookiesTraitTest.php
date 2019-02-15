@@ -74,12 +74,12 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * @return \Generator
      */
-    public function doOnceProvider()
+    public function doOnceProvider(): \Generator
     {
-        yield [['behat_helpers_reset_cache'], [], ['cookie'], ['testDoOnce'], ['step'], 1, 1, 2];
-        yield [['behat_helpers_reset_cache', 'behat_helpers_no_cache'], [], ['cookie'], [], ['step'], 1, 1, 2];
+        yield [['behat_helpers_reset_cache'], [], ['cookie'], ['testDoOnce'], ['step'], 1, 1, 1];
+        yield [['behat_helpers_reset_cache', 'behat_helpers_no_cache'], [], ['cookie'], [], ['step'], 1, 1, 1];
         yield [['behat_helpers_no_cache'], ['cookie'], ['cookie'], ['step'], ['step'], 0, 0, 0];
-        yield [[], ['cookie'], ['cookie'], ['step', 'testDoOnce'], ['step'], 0, 1, 2];
+        yield [[], ['cookie'], ['cookie'], ['step', 'testDoOnce'], ['step'], 0, 1, 1];
     }
 
     /**
@@ -94,7 +94,7 @@ class ReloadCookiesTraitTest extends TestCase
         $driver->expects($this->once())->method('getWebDriverSession')->willReturn($wdSession);
 
         $session = $this->createMock(Session::class);
-        $session->expects($this->exactly(2))->method('getDriver')->willReturn($driver);
+        $session->expects($this->once())->method('getDriver')->willReturn($driver);
 
         $mink = new Mink(['foo' => $session]);
         $mink->setDefaultSessionName('foo');
@@ -160,7 +160,7 @@ class ReloadCookiesTraitTest extends TestCase
         $driver->expects($this->once())->method('getWebDriverSession')->willReturn($wdSession);
 
         $session = $this->createMock(Session::class);
-        $session->expects($this->exactly(2))->method('getDriver')->willReturn($driver);
+        $session->expects($this->once())->method('getDriver')->willReturn($driver);
 
         $mink = new Mink(['foo' => $session]);
         $mink->setDefaultSessionName('foo');

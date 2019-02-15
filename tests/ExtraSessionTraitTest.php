@@ -39,6 +39,7 @@ class ExtraSessionTraitTest extends TestCase
         $driver->expects($this->once())->method('maximizeWindow');
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -53,6 +54,7 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('executeScript')->with($this->equalTo('(function(){window.scrollTo(0, 10);})();'));
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -67,6 +69,7 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('wait')->with($this->equalTo(1000));
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -85,6 +88,7 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(true)
         ;
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitForCssElementBeingVisible('foo', 2);
@@ -104,6 +108,7 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(false)
         ;
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitForCssElementBeingVisible('foo', 2);
@@ -121,6 +126,7 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(true)
         ;
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitForCssElementBeingInvisible('foo', 2);
@@ -140,6 +146,7 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(false)
         ;
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitForCssElementBeingInvisible('foo', 2);
@@ -164,6 +171,7 @@ class ExtraSessionTraitTest extends TestCase
 
         $context = $this->createMock(RawMinkContext::class);
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitPageContains($context, 'foo', 2);
@@ -190,6 +198,7 @@ class ExtraSessionTraitTest extends TestCase
 
         $context = $this->createMock(RawMinkContext::class);
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitPageContains($context, 'foo', 2);
@@ -214,6 +223,7 @@ class ExtraSessionTraitTest extends TestCase
 
         $context = $this->createMock(RawMinkContext::class);
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitPageNotContains($context, 'foo', 2);
@@ -240,6 +250,7 @@ class ExtraSessionTraitTest extends TestCase
 
         $context = $this->createMock(RawMinkContext::class);
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
         $mock->iWaitPageNotContains($context, 'foo', 2);
@@ -260,6 +271,7 @@ class ExtraSessionTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
@@ -280,6 +292,7 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 

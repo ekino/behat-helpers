@@ -29,6 +29,7 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testLogin(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
         $mock = $this->getSonataAdminMock();
         $mock->expects($this->once())->method('visitPath')->with($this->equalTo('sonata_user_admin_security_login'));
         $mock->expects($this->exactly(2))->method('fillField')->withConsecutive(
@@ -45,6 +46,7 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIOpenMenuItemByText(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
         $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -66,6 +68,7 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIOpenMenuItemByTextWithElementNotFound(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
         $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -87,10 +90,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIShouldSeeActionInNavbarWithoutElementFound(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo('//nav//a[contains(.,"foo")]'));
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
@@ -108,10 +112,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIShouldSeeActionInNavbarWithoutElementNotVisible(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(false);
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo('//nav//a[contains(.,"foo")]'))->willReturn($element);
@@ -129,11 +134,12 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIShouldNotSeeActionInNavbarWithElement(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo('//nav//a[contains(.,"foo")]'))->willReturn($element);
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
@@ -151,10 +157,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIClickOnActionInNavbarWithoutElementFound(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo('//nav//a[contains(.,"foo")]'));
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
@@ -169,10 +176,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIClickOnActionInNavbarWithElementFound(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('click');
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo('//nav//a[contains(.,"foo")]'))->willReturn($element);
@@ -190,6 +198,7 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testClickingOnElementShouldOpenPopinWithoutExtraSessionTraitUse(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
         $mock = $this->getSonataAdminMock();
         $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
     }
@@ -202,6 +211,7 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testThePopinShouldBeClosedWithoutExtraSessionTraitUse(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
         $mock = $this->getSonataAdminMock();
         $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
     }
@@ -214,11 +224,12 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testThePopinShouldNotBeOpenedWithOpenedPopin(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(true);
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn($element);
@@ -234,9 +245,10 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testThePopinShouldNotBeOpenedWithoutPopin(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn(null);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -250,10 +262,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testThePopinShouldBeOpened(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(true);
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn($element);
@@ -271,10 +284,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testThePopinShouldBeOpenedWithInvisiblePopin(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('isVisible')->willReturn(false);
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn($element);
@@ -292,9 +306,10 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testThePopinShouldBeOpenedWithoutPopin(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn(null);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -308,10 +323,11 @@ class SonataAdminTraitTest extends TestCase
      */
     public function testIFillInSelect2Field(): void
     {
+        /** @var SonataAdminTrait|MockObject $mock */
+        $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
         $element = $this->createMock(NodeElement::class);
-        $mock    = $this->getSonataAdminMock();
 
         $element->expects($this->once())->method('getAttribute')->with($this->equalTo('value'))->willReturn('foo');
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo(sprintf('//select[@id="%s"]//option[text()="%s"]', 'bar', 'foo')))->willReturn($element);

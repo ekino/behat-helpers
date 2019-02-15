@@ -33,6 +33,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $webAssert = $this->createMock(WebAssert::class);
         $webAssert->expects($this->once())->method('elementAttributeExists')->with($this->equalTo('css'), $this->equalTo('a.action_bar__next'));
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('assertSession')->willReturn($webAssert);
         $mock->expects($this->once())->method('fixStepArgument')->with($this->equalTo('disabled'));
@@ -54,6 +55,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
@@ -74,6 +76,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -93,6 +96,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -112,6 +116,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -134,6 +139,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -155,6 +161,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
@@ -174,6 +181,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -196,6 +204,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -218,6 +227,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
@@ -239,6 +249,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
+        /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
