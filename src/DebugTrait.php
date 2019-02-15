@@ -36,7 +36,7 @@ trait DebugTrait
      *
      * @param BeforeScenarioScope $scope
      */
-    public function startProfilingBeforeScenario(BeforeScenarioScope $scope)
+    public function startProfilingBeforeScenario(BeforeScenarioScope $scope): void
     {
         if (!\in_array('behat_helpers_profile', array_merge($scope->getFeature()->getTags(), $scope->getScenario()->getTags()))) {
             return;
@@ -49,7 +49,7 @@ trait DebugTrait
     /**
      * @AfterScenario
      */
-    public function stopProfilingAfterScenario()
+    public function stopProfilingAfterScenario(): void
     {
         if (!$this->stopwatch) {
             return;
@@ -69,7 +69,7 @@ trait DebugTrait
      * @throws \Behat\Mink\Exception\UnsupportedDriverActionException
      * @throws \RuntimeException
      */
-    public function collectDebugAfterFailedStep(AfterStepScope $scope)
+    public function collectDebugAfterFailedStep(AfterStepScope $scope): void
     {
         if (TestResult::FAILED !== $scope->getTestResult()->getResultCode()) {
             return;

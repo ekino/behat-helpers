@@ -32,7 +32,7 @@ class DebugTraitTest extends TestCase
     /**
      * Tests the startProfilingBeforeScenario method.
      */
-    public function testStartProfilingBeforeScenarioWithTag()
+    public function testStartProfilingBeforeScenarioWithTag(): void
     {
         $env     = $this->createMock(Environment::class);
         $feature = $this->createMock(FeatureNode::class);
@@ -51,7 +51,7 @@ class DebugTraitTest extends TestCase
     /**
      * Tests the startProfilingBeforeScenario method.
      */
-    public function testStartProfilingBeforeScenarioWithoutTag()
+    public function testStartProfilingBeforeScenarioWithoutTag(): void
     {
         $env     = $this->createMock(Environment::class);
         $feature = $this->createMock(FeatureNode::class);
@@ -70,7 +70,7 @@ class DebugTraitTest extends TestCase
     /**
      * Tests the stopProfilingAfterScenario method.
      */
-    public function testStopProfilingAfterScenarioWithTag()
+    public function testStopProfilingAfterScenarioWithTag(): void
     {
         $env     = $this->createMock(Environment::class);
         $feature = $this->createMock(FeatureNode::class);
@@ -91,7 +91,7 @@ class DebugTraitTest extends TestCase
     /**
      * Tests the stopProfilingAfterScenario method.
      */
-    public function testStopProfilingAfterScenarioWithoutTag()
+    public function testStopProfilingAfterScenarioWithoutTag(): void
     {
         $env     = $this->createMock(Environment::class);
         $feature = $this->createMock(FeatureNode::class);

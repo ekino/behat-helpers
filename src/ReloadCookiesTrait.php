@@ -48,7 +48,7 @@ trait ReloadCookiesTrait
     /**
      * @BeforeScenario
      */
-    public function getTagsBeforeScenario(BeforeScenarioScope $scope)
+    public function getTagsBeforeScenario(BeforeScenarioScope $scope): void
     {
         $this->tags = array_merge($scope->getFeature()->getTags(), $scope->getScenario()->getTags());
     }
@@ -56,7 +56,7 @@ trait ReloadCookiesTrait
     /**
      * @AfterScenario
      */
-    public function saveCookiesAfterScenario(AfterScenarioScope $scope)
+    public function saveCookiesAfterScenario(AfterScenarioScope $scope): void
     {
         if (!$this->saveCookies) {
             return;
@@ -72,7 +72,7 @@ trait ReloadCookiesTrait
     /**
      * @param callable $callback
      */
-    public function doOnce(callable $callback)
+    public function doOnce(callable $callback): void
     {
         $reset     = \in_array('behat_helpers_reset_cache', $this->tags);
         $cacheable = !\in_array('behat_helpers_no_cache', $this->tags);
@@ -107,7 +107,7 @@ trait ReloadCookiesTrait
      *
      * @return bool
      */
-    private function resetCookies()
+    private function resetCookies(): bool
     {
         if (!static::$cookies) {
             return false;
@@ -131,7 +131,7 @@ trait ReloadCookiesTrait
      *
      * @return bool
      */
-    private function reloadCookies()
+    private function reloadCookies(): bool
     {
         if (!static::$cookies) {
             return false;
@@ -153,7 +153,7 @@ trait ReloadCookiesTrait
     /**
      * @throws \RuntimeException
      */
-    private function assertDriverSupported()
+    private function assertDriverSupported(): void
     {
         if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
             throw new \RuntimeException(sprintf('Saving cookies only works with driver %s', Selenium2Driver::class));

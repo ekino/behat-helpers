@@ -21,7 +21,7 @@ trait TestHelperTrait
     /**
      * Call protected/private method of a class.
      *
-     * @param object $object     Instancied object that will return on method on
+     * @param mixed  $object     Instancied object that will return on method on
      * @param string $methodName Method name to call
      * @param array  $parameters Array of parameters to pass into method
      *
@@ -29,7 +29,7 @@ trait TestHelperTrait
      *
      * @return mixed Method return
      */
-    public function invokeMethod($object, $methodName, array $parameters = [])
+    public function invokeMethod($object, string $methodName, array $parameters = [])
     {
         $method = new \ReflectionMethod($object, $methodName);
         $method->setAccessible(true);
@@ -44,7 +44,7 @@ trait TestHelperTrait
      *
      * @throws \ReflectionException
      */
-    public function setPrivatePropertyValue($object, $propertyName, $value)
+    public function setPrivatePropertyValue($object, string $propertyName, $value): void
     {
         $property = new \ReflectionProperty($object, $propertyName);
         $property->setAccessible(true);
@@ -60,7 +60,7 @@ trait TestHelperTrait
      *
      * @return mixed
      */
-    public function getPrivatePropertyValue($object, $propertyName)
+    public function getPrivatePropertyValue($object, string $propertyName)
     {
         $property = new \ReflectionProperty($object, $propertyName);
         $property->setAccessible(true);

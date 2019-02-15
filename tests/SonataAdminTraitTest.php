@@ -16,6 +16,7 @@ use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Ekino\BehatHelpers\SonataAdminTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -26,7 +27,7 @@ class SonataAdminTraitTest extends TestCase
     /**
      * Tests the login method.
      */
-    public function testLogin()
+    public function testLogin(): void
     {
         $mock = $this->getSonataAdminMock();
         $mock->expects($this->once())->method('visitPath')->with($this->equalTo('sonata_user_admin_security_login'));
@@ -42,7 +43,7 @@ class SonataAdminTraitTest extends TestCase
     /**
      * Tests the iOpenMenuItemByText method with element found.
      */
-    public function testIOpenMenuItemByText()
+    public function testIOpenMenuItemByText(): void
     {
         $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
@@ -63,7 +64,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException Behat\Mink\Exception\ElementNotFoundException
      * @expectedExceptionMessage Tag with text "foo" not found
      */
-    public function testIOpenMenuItemByTextWithElementNotFound()
+    public function testIOpenMenuItemByTextWithElementNotFound(): void
     {
         $mock    = $this->getSonataAdminMock();
         $session = $this->createMock(Session::class);
@@ -84,7 +85,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException Behat\Mink\Exception\ElementNotFoundException
      * @expectedExceptionMessage Tag with text "foo" not found
      */
-    public function testIShouldSeeActionInNavbarWithoutElementFound()
+    public function testIShouldSeeActionInNavbarWithoutElementFound(): void
     {
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
@@ -105,7 +106,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException WebDriver\Exception\ElementNotVisible
      * @expectedExceptionMessage Cannot find action "foo" in Navbar action
      */
-    public function testIShouldSeeActionInNavbarWithoutElementNotVisible()
+    public function testIShouldSeeActionInNavbarWithoutElementNotVisible(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -126,7 +127,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException Behat\Mink\Exception\ElementHtmlException
      * @expectedExceptionMessage Action "foo" has been found in Navbar action
      */
-    public function testIShouldNotSeeActionInNavbarWithElement()
+    public function testIShouldNotSeeActionInNavbarWithElement(): void
     {
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
@@ -148,7 +149,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException Behat\Mink\Exception\ElementNotFoundException
      * @expectedExceptionMessage Tag with text "foo" not found
      */
-    public function testIClickOnActionInNavbarWithoutElementFound()
+    public function testIClickOnActionInNavbarWithoutElementFound(): void
     {
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
@@ -166,7 +167,7 @@ class SonataAdminTraitTest extends TestCase
     /**
      * Tests the iClickOnActionInNavbar method with element found.
      */
-    public function testIClickOnActionInNavbarWithElementFound()
+    public function testIClickOnActionInNavbarWithElementFound(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -187,7 +188,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Please use the trait Ekino\BehatHelpers\ExtraSessionTrait in the class Trait_SonataAdminTrait
      */
-    public function testClickingOnElementShouldOpenPopinWithoutExtraSessionTraitUse()
+    public function testClickingOnElementShouldOpenPopinWithoutExtraSessionTraitUse(): void
     {
         $mock = $this->getSonataAdminMock();
         $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
@@ -199,7 +200,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException \RuntimeException
      * @expectedExceptionMessage Please use the trait Ekino\BehatHelpers\ExtraSessionTrait in the class Trait_SonataAdminTrait
      */
-    public function testThePopinShouldBeClosedWithoutExtraSessionTraitUse()
+    public function testThePopinShouldBeClosedWithoutExtraSessionTraitUse(): void
     {
         $mock = $this->getSonataAdminMock();
         $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
@@ -211,7 +212,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException Behat\Mink\Exception\ElementHtmlException
      * @expectedExceptionMessage Popin div.modal[id$=foo] was found and opened
      */
-    public function testThePopinShouldNotBeOpenedWithOpenedPopin()
+    public function testThePopinShouldNotBeOpenedWithOpenedPopin(): void
     {
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
@@ -231,7 +232,7 @@ class SonataAdminTraitTest extends TestCase
     /**
      * Tests the thePopinShouldNotBeOpened method without element found.
      */
-    public function testThePopinShouldNotBeOpenedWithoutPopin()
+    public function testThePopinShouldNotBeOpenedWithoutPopin(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -247,7 +248,7 @@ class SonataAdminTraitTest extends TestCase
     /**
      * Tests the thePopinShouldBeOpened method with element found and visible.
      */
-    public function testThePopinShouldBeOpened()
+    public function testThePopinShouldBeOpened(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -268,7 +269,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException WebDriver\Exception\ElementNotVisible
      * @expectedExceptionMessage Modal div.modal[id$=foo] should be opened and visible
      */
-    public function testThePopinShouldBeOpenedWithInvisiblePopin()
+    public function testThePopinShouldBeOpenedWithInvisiblePopin(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -289,7 +290,7 @@ class SonataAdminTraitTest extends TestCase
      * @expectedException WebDriver\Exception\ElementNotVisible
      * @expectedExceptionMessage Modal div.modal[id$=foo] should be opened and visible
      */
-    public function testThePopinShouldBeOpenedWithoutPopin()
+    public function testThePopinShouldBeOpenedWithoutPopin(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -305,7 +306,7 @@ class SonataAdminTraitTest extends TestCase
     /**
      * Tests the iFillInSelect2Field method.
      */
-    public function testIFillInSelect2Field()
+    public function testIFillInSelect2Field(): void
     {
         $session = $this->createMock(Session::class);
         $page    = $this->createMock(DocumentElement::class);
@@ -322,9 +323,9 @@ class SonataAdminTraitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
-    private function getSonataAdminMock()
+    private function getSonataAdminMock(): MockObject
     {
         return $this->getMockForTrait(
             SonataAdminTrait::class,

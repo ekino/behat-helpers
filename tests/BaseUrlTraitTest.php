@@ -28,7 +28,7 @@ class BaseUrlTraitTest extends TestCase
     /**
      * Tests the setBaseUrlBeforeScenario method.
      */
-    public function testSetBaseUrlBeforeScenario()
+    public function testSetBaseUrlBeforeScenario(): void
     {
         $context = $this->createMock(RawMinkContext::class);
         $context->expects($this->once())->method('setMinkParameter')->with($this->equalTo('base_url'), $this->equalTo('https://foo.bar'));

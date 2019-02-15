@@ -14,6 +14,7 @@ namespace Tests\Ekino\BehatHelpers;
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Session;
 use Ekino\BehatHelpers\ExtraSessionTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -24,7 +25,7 @@ class ExtraSessionTraitTest extends TestCase
     /**
      * Tests the maximizeWindowOnBeforeScenario method.
      */
-    public function testMaximizeWindowOnBeforeScenario()
+    public function testMaximizeWindowOnBeforeScenario(): void
     {
         $driver  = $this->createMock(DriverInterface::class);
         $session = $this->createMock(Session::class);
@@ -40,7 +41,7 @@ class ExtraSessionTraitTest extends TestCase
     /**
      * Tests the waitForSeconds method.
      */
-    public function testWaitForSeconds()
+    public function testWaitForSeconds(): void
     {
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('wait')->with($this->equalTo(1000));
@@ -54,7 +55,7 @@ class ExtraSessionTraitTest extends TestCase
     /**
      * Tests the iWaitForCssElementBeingVisible method.
      */
-    public function testIWaitForCssElementBeingVisible()
+    public function testIWaitForCssElementBeingVisible(): void
     {
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
@@ -73,7 +74,7 @@ class ExtraSessionTraitTest extends TestCase
      *
      * @expectedException \RuntimeException
      */
-    public function testIWaitForCssElementBeingVisibleFail()
+    public function testIWaitForCssElementBeingVisibleFail(): void
     {
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
@@ -90,7 +91,7 @@ class ExtraSessionTraitTest extends TestCase
     /**
      * Tests the iWaitForCssElementBeingInvisible method.
      */
-    public function testIWaitForCssElementBeingInvisible()
+    public function testIWaitForCssElementBeingInvisible(): void
     {
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
@@ -109,7 +110,7 @@ class ExtraSessionTraitTest extends TestCase
      *
      * @expectedException \RuntimeException
      */
-    public function testIWaitForCssElementBeingInvisibleFail()
+    public function testIWaitForCssElementBeingInvisibleFail(): void
     {
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
@@ -126,7 +127,7 @@ class ExtraSessionTraitTest extends TestCase
     /**
      * Tests the scrollTo method.
      */
-    public function testScrollTo()
+    public function testScrollTo(): void
     {
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('executeScript')->with($this->equalTo('(function(){window.scrollTo(0, 10);})();'));
@@ -138,9 +139,9 @@ class ExtraSessionTraitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
-    private function getExtraSessionMock()
+    private function getExtraSessionMock(): MockObject
     {
         return $this->getMockForTrait(
             ExtraSessionTrait::class,

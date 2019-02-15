@@ -17,6 +17,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Behat\Mink\WebAssert;
 use Ekino\BehatHelpers\ExtraWebAssertTrait;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -27,7 +28,7 @@ class ExtraWebAssertTraitTest extends TestCase
     /**
      * Tests the assertElementAttributeExists method.
      */
-    public function testAssertElementAttributeExists()
+    public function testAssertElementAttributeExists(): void
     {
         $webAssert = $this->createMock(WebAssert::class);
         $webAssert->expects($this->once())->method('elementAttributeExists')->with($this->equalTo('css'), $this->equalTo('a.action_bar__next'));
@@ -44,7 +45,7 @@ class ExtraWebAssertTraitTest extends TestCase
      *
      * @expectedException \Behat\Mink\Exception\ElementNotFoundException
      */
-    public function testClickElementThrowsExceptionIfElementNotFound()
+    public function testClickElementThrowsExceptionIfElementNotFound(): void
     {
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.sonata-ba-list a.sonata-link-identifier'));
@@ -62,7 +63,7 @@ class ExtraWebAssertTraitTest extends TestCase
     /**
      * Tests the method clickElement.
      */
-    public function testClickElement()
+    public function testClickElement(): void
     {
         $element = $this->createMock(NodeElement::class);
         $element->expects($this->once())->method('click');
@@ -80,9 +81,9 @@ class ExtraWebAssertTraitTest extends TestCase
     }
 
     /**
-     * @return \PHPUnit_Framework_MockObject_MockObject
+     * @return MockObject
      */
-    private function getExtraWebAssertMock()
+    private function getExtraWebAssertMock(): MockObject
     {
         return $this->getMockForTrait(
             ExtraWebAssertTrait::class,
