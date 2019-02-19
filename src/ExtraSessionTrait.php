@@ -13,7 +13,7 @@ namespace Ekino\BehatHelpers;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ResponseTextException;
-use Behat\MinkExtension\Context\MinkContext;
+use Behat\MinkExtension\Context\RawMinkContext;
 
 /**
  * @author Rémi Marseille <remi.marseille@ekino.com>
@@ -93,16 +93,17 @@ trait ExtraSessionTrait
      *
      * @Given /^I wait (\d+) seconds that page contains text "([^"]*)"$/
      *
-     * @param string $text
-     * @param int    $seconds
+     * @param RawMinkContext $context
+     * @param string         $text
+     * @param int            $seconds
      *
      * @throws \RuntimeException
      */
-    public function iWaitPageContains($text, $seconds): void
+    public function iWaitPageContains(RawMinkContext $context, string $text, int $seconds): void
     {
         $page = $this->getSession()->getPage();
 
-        $result = $page->waitFor($seconds, function (MinkContext $context) use ($text) {
+        $result = $page->waitFor($seconds, function () use ($context, $text) {
             // Assertion throw exception if not correct, nothing if correct
             try {
                 $context->assertSession()->pageTextContains($text);
@@ -123,16 +124,17 @@ trait ExtraSessionTrait
      *
      * @Given /^I wait (\d+) seconds that page not contains text "([^"]*)"$/
      *
-     * @param string $text
-     * @param int    $seconds
+     * @param RawMinkContext $context
+     * @param string         $text
+     * @param int            $seconds
      *
      * @throws \RuntimeException
      */
-    public function iWaitPageNotContains($text, $seconds): void
+    public function iWaitPageNotContains(RawMinkContext $context, string $text, int $seconds): void
     {
         $page = $this->getSession()->getPage();
 
-        $result = $page->waitFor($seconds, function (MinkContext $context) use ($text) {
+        $result = $page->waitFor($seconds, function () use ($context, $text) {
             // Assertion throw exception if not correct, nothing if correct
             try {
                 $context->assertSession()->pageTextNotContains($text);
