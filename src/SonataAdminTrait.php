@@ -202,7 +202,7 @@ trait SonataAdminTrait
         return $this->getSession()->getPage()->find('xpath', '//nav//a[contains(.,"'.$text.'")]');
     }
 
-    /**string
+    /**
      * Fills in Select2 field with specified
      *
      * @When /^(?:|I )set the select2 field "(?P<field>(?:[^"]|\\")*)" to "(?P<textValues>(?:[^"]|\\")*)"$/
