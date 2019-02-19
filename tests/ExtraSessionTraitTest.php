@@ -15,6 +15,7 @@ use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Ekino\BehatHelpers\ExtraSessionTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -161,9 +162,11 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
+        $context = $this->createMock(RawMinkContext::class);
+
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageContains('foo', 2);
+        $mock->iWaitPageContains($context, 'foo', 2);
     }
 
     /**
@@ -185,9 +188,11 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
+        $context = $this->createMock(RawMinkContext::class);
+
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageContains('foo', 2);
+        $mock->iWaitPageContains($context, 'foo', 2);
     }
 
     /**
@@ -207,9 +212,11 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
+        $context = $this->createMock(RawMinkContext::class);
+
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageNotContains('foo', 2);
+        $mock->iWaitPageNotContains($context, 'foo', 2);
     }
 
     /**
@@ -231,9 +238,11 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
+        $context = $this->createMock(RawMinkContext::class);
+
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageNotContains('foo', 2);
+        $mock->iWaitPageNotContains($context, 'foo', 2);
     }
 
     /**
