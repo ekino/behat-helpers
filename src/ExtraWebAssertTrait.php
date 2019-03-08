@@ -63,7 +63,7 @@ trait ExtraWebAssertTrait
      */
     public function assertAtLeastNumElements($num, $selector): void
     {
-        $elements = $this->getSession()->getPage()->find('css', $selector);
+        $elements = $this->getSession()->getPage()->findAll('css', $selector);
 
         if (null === $elements) {
             throw new ElementNotFoundException($this->getSession()->getDriver(), 'element', 'css', $selector);
@@ -91,7 +91,7 @@ trait ExtraWebAssertTrait
      */
     public function assertExactlyNumElement($num, $selector): void
     {
-        $elements = $this->getSession()->getPage()->find('css', $selector);
+        $elements = $this->getSession()->getPage()->findAll('css', $selector);
 
         if (null === $elements) {
             throw new ElementNotFoundException($this->getSession()->getDriver(), 'element', 'css', $selector);
