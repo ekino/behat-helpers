@@ -47,6 +47,8 @@ trait ReloadCookiesTrait
 
     /**
      * @BeforeScenario
+     *
+     * @param BeforeScenarioScope $scope
      */
     public function getTagsBeforeScenario(BeforeScenarioScope $scope): void
     {
@@ -55,6 +57,8 @@ trait ReloadCookiesTrait
 
     /**
      * @AfterScenario
+     *
+     * @param AfterScenarioScope $scope
      */
     public function saveCookiesAfterScenario(AfterScenarioScope $scope): void
     {
