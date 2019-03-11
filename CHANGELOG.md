@@ -12,3 +12,4 @@ master
 * Id ending popin selector is now required for Sonata popin rules
 * Drop php5.6 support
 * Upgrade phpunit to ^7.5
+* Disallow reloading cookies if reset cookies is called
