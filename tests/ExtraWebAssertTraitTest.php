@@ -88,7 +88,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $element = $this->createMock(NodeElement::class);
 
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element, $element]);
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element, $element]);
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -107,7 +107,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $element = $this->createMock(NodeElement::class);
 
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element]);
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element]);
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -129,7 +129,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $element = $this->createMock(NodeElement::class);
 
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn($element);
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn($element);
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -149,7 +149,7 @@ class ExtraWebAssertTraitTest extends TestCase
     public function testAssertAtLeastNumElementsThrowsExceptionIfElementNotFound(): void
     {
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'));
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'));
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -169,7 +169,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $element = $this->createMock(NodeElement::class);
 
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element]);
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element]);
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -191,7 +191,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $element = $this->createMock(NodeElement::class);
 
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn($element);
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn($element);
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -213,7 +213,7 @@ class ExtraWebAssertTraitTest extends TestCase
         $element = $this->createMock(NodeElement::class);
 
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element, $element]);
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'))->willReturn([$element, $element, $element]);
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
@@ -233,7 +233,7 @@ class ExtraWebAssertTraitTest extends TestCase
     public function testAssertExactlyNumElementThrowsExceptionIfElementNotFound(): void
     {
         $page = $this->createMock(DocumentElement::class);
-        $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('.foo'));
+        $page->expects($this->once())->method('findAll')->with($this->equalTo('css'), $this->equalTo('.foo'));
 
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
