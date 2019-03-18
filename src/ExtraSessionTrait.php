@@ -159,7 +159,7 @@ trait ExtraSessionTrait
      *
      * @throws ElementNotFoundException
      */
-    public function iClickOnText($text): void
+    public function iClickOnText(string $text): void
     {
         $page    = $this->getSession()->getPage();
         $element = $page->find('xpath', sprintf("//*[contains(.,'%s')]", $text));

@@ -55,13 +55,13 @@ trait ExtraWebAssertTrait
      *
      * @Then /^(?:|I )should see at least (?P<num>\d+) "(?P<element>[^"]*)" elements?$/
      *
-     * @param int $num
-     * @param     $selector
+     * @param int    $num
+     * @param string $selector
      *
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      * @throws \Exception
      */
-    public function assertAtLeastNumElements($num, $selector): void
+    public function assertAtLeastNumElements(int $num, string $selector): void
     {
         $elements = $this->getSession()->getPage()->findAll('css', $selector);
 
@@ -89,7 +89,7 @@ trait ExtraWebAssertTrait
      * @throws \Behat\Mink\Exception\ElementNotFoundException
      * @throws \Exception
      */
-    public function assertExactlyNumElement($num, $selector): void
+    public function assertExactlyNumElement(int $num, string $selector): void
     {
         $elements = $this->getSession()->getPage()->findAll('css', $selector);
 

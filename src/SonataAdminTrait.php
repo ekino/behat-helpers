@@ -58,7 +58,7 @@ trait SonataAdminTrait
      *
      * @Then /^I should see "([^"]*)" action in navbar$/
      *
-     * @param mixed $text
+     * @param string $text
      *
      * @throws ElementNotFoundException
      * @throws ElementNotVisible

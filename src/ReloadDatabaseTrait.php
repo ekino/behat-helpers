@@ -33,6 +33,8 @@ trait ReloadDatabaseTrait
     /**
      * @BeforeScenario
      *
+     * @param BeforeScenarioScope $scope
+     *
      * @throws \RuntimeException
      */
     public function dumpDatabaseOnBeforeScenario(BeforeScenarioScope $scope): void
