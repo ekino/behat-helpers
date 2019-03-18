@@ -14,6 +14,7 @@ namespace Ekino\BehatHelpers;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\MinkExtension\Context\RawMinkContext;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use Behat\Testwork\Tester\Result\TestResult;
 use Cocur\Slugify\Slugify;
@@ -51,7 +52,7 @@ trait DebugTrait
      */
     public function stopProfilingAfterScenario(): void
     {
-        if (!$this->stopwatch) {
+        if (empty($this->stopwatch)) {
             return;
         }
 
@@ -75,6 +76,10 @@ trait DebugTrait
             return;
         }
 
+        if (!$this instanceof RawMinkContext) {
+            return;
+        }
+
         $driver = $this->getSession()->getDriver();
 
         if (!$driver instanceof Selenium2Driver) {
@@ -89,7 +94,7 @@ trait DebugTrait
 
         $path = sprintf('%s/%s.%s',
             $this->getContainer()->getParameter('kernel.logs_dir'),
-            $slugify->slugify($scope->getFeature()->getTitle()),
+            $slugify->slugify($scope->getFeature()->getTitle() ?? ''),
             $slugify->slugify($scope->getStep()->getText())
         );
 

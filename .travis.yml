@@ -17,5 +17,6 @@ install: make app-install
 
 script:
   - make app-test-with-code-coverage
+  - make app-static-analysis
   - make app-cs-check
   - make app-security-check

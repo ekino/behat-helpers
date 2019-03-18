@@ -66,11 +66,11 @@ trait ReloadCookiesTrait
             return;
         }
 
-        $this->assertDriverSupported();
+        $driver = $this->assertDriverSupported();
 
         echo "Saving cookies...\n";
 
-        static::$cookies = $this->getSession()->getDriver()->getWebDriverSession()->getAllCookies();
+        static::$cookies = $driver->getWebDriverSession()->getAllCookies();
     }
 
     /**
@@ -120,11 +120,11 @@ trait ReloadCookiesTrait
         static::$cookies = [];
         static::$steps   = [];
 
-        $this->assertDriverSupported();
+        $driver = $this->assertDriverSupported();
 
         echo "Resetting cookies...\n";
 
-        $session = $this->getSession()->getDriver()->getWebDriverSession();
+        $session = $driver->getWebDriverSession();
         $session->deleteAllCookies();
 
         return true;
@@ -141,11 +141,11 @@ trait ReloadCookiesTrait
             return false;
         }
 
-        $this->assertDriverSupported();
+        $driver = $this->assertDriverSupported();
 
         echo "Reloading cookies...\n";
 
-        $session = $this->getSession()->getDriver()->getWebDriverSession();
+        $session = $driver->getWebDriverSession();
 
         foreach (static::$cookies as $cookie) {
             $session->setCookie($cookie);
@@ -156,11 +156,17 @@ trait ReloadCookiesTrait
 
     /**
      * @throws \RuntimeException
+     * @return Selenium2Driver
+     *
      */
-    private function assertDriverSupported(): void
+    private function assertDriverSupported(): Selenium2Driver
     {
-        if (!$this->getSession()->getDriver() instanceof Selenium2Driver) {
+        $driver = $this->getSession()->getDriver();
+
+        if (!$driver instanceof Selenium2Driver) {
             throw new \RuntimeException(sprintf('Saving cookies only works with driver %s', Selenium2Driver::class));
         }
+
+        return $driver;
     }
 }
