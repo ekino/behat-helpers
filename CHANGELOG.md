@@ -14,3 +14,4 @@ master
 * Upgrade phpunit to ^7.5
 * Disallow reloading cookies if reset cookies is called
 * Add phpstan analysis
+* Enable strict typing
