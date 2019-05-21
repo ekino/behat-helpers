@@ -15,3 +15,4 @@ master
 * Disallow reloading cookies if reset cookies is called
 * Add phpstan analysis
 * Enable strict typing
+* Add matrix and coveralls tool
