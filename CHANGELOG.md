@@ -16,3 +16,4 @@ master
 * Add phpstan analysis
 * Enable strict typing
 * Add matrix and coveralls tool
+* Add coverage coveralls badge
