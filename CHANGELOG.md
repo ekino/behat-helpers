@@ -4,6 +4,9 @@ CHANGELOG
 master
 ------
 
+v0.1.0
+------
+
 * Allow symfony/stopwatch ^2.8
 * Fixed iWaitForCssElementBeingVisible / iWaitForCssElementBeingInvisible:
   * throw \RuntimeException to make test fail
