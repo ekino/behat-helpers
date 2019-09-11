@@ -171,12 +171,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        $context = $this->createMock(RawMinkContext::class);
-
         /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageContains($context, 'foo', 2);
+        $mock->iWaitPageContains(2, 'foo');
     }
 
     /**
@@ -198,12 +196,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        $context = $this->createMock(RawMinkContext::class);
-
         /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageContains($context, 'foo', 2);
+        $mock->iWaitPageContains(2, 'foo');
     }
 
     /**
@@ -223,12 +219,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        $context = $this->createMock(RawMinkContext::class);
-
         /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageNotContains($context, 'foo', 2);
+        $mock->iWaitPageNotContains(2, 'foo');
     }
 
     /**
@@ -250,12 +244,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        $context = $this->createMock(RawMinkContext::class);
-
         /** @var ExtraSessionTrait|MockObject $mock */
         $mock = $this->getExtraSessionMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageNotContains($context, 'foo', 2);
+        $mock->iWaitPageNotContains(2, 'foo');
     }
 
     /**
