@@ -4,6 +4,11 @@ CHANGELOG
 master
 ------
 
+* todo
+
+v0.1.1
+------
+
 * Add GitHub pull request template
 * Fix IwaitPageContains and IWaitPageNotContains
 
