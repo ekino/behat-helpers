@@ -95,20 +95,19 @@ trait ExtraSessionTrait
      *
      * @Given /^I wait (\d+) seconds that page contains text "([^"]*)"$/
      *
-     * @param RawMinkContext $context
-     * @param string         $text
-     * @param int            $seconds
+     * @param int    $seconds
+     * @param string $text
      *
      * @throws \RuntimeException
      */
-    public function iWaitPageContains(RawMinkContext $context, string $text, int $seconds): void
+    public function iWaitPageContains(int $seconds, string $text): void
     {
         $page = $this->getSession()->getPage();
 
-        $result = $page->waitFor($seconds, function () use ($context, $text) {
+        $result = $page->waitFor($seconds, function () use ($text) {
             // Assertion throw exception if not correct, nothing if correct
             try {
-                $context->assertSession()->pageTextContains($text);
+                $this->assertSession()->pageTextContains($text);
 
                 return true;
             } catch (ResponseTextException $e) {
@@ -126,20 +125,19 @@ trait ExtraSessionTrait
      *
      * @Given /^I wait (\d+) seconds that page not contains text "([^"]*)"$/
      *
-     * @param RawMinkContext $context
-     * @param string         $text
-     * @param int            $seconds
+     * @param int    $seconds
+     * @param string $text
      *
      * @throws \RuntimeException
      */
-    public function iWaitPageNotContains(RawMinkContext $context, string $text, int $seconds): void
+    public function iWaitPageNotContains(int $seconds, string $text): void
     {
         $page = $this->getSession()->getPage();
 
-        $result = $page->waitFor($seconds, function () use ($context, $text) {
+        $result = $page->waitFor($seconds, function () use ($text) {
             // Assertion throw exception if not correct, nothing if correct
             try {
-                $context->assertSession()->pageTextNotContains($text);
+                $this->assertSession()->pageTextNotContains($text);
 
                 return true;
             } catch (ResponseTextException $e) {

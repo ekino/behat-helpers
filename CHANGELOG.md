@@ -4,6 +4,8 @@ CHANGELOG
 master
 ------
 
+* Fix IwaitPageContains and IWaitPageNotContains
+
 v0.1.0
 ------
 
