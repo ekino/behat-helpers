@@ -4,6 +4,7 @@ CHANGELOG
 master
 ------
 
+* Add GitHub pull request template
 * Fix IwaitPageContains and IWaitPageNotContains
 
 v0.1.0
