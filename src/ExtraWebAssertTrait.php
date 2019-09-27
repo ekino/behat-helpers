@@ -35,6 +35,20 @@ trait ExtraWebAssertTrait
     }
 
     /**
+     * Checks that an attribute of a specific element does not contain text.
+     *
+     * @Then /^the attribute "(?P<attribute>(?:[^"]|\\")*)" of "(?P<element>[^"]*)" element should not have value "(?P<value>(?:[^"]|\\")*)"$/
+     *
+     * @param string $element
+     * @param string $attribute
+     * @param string $value
+     */
+    public function elementAttributeNotContains(string $element, string $attribute, string $value): void
+    {
+        $this->assertSession()->elementAttributeNotContains('css', $element, $attribute, $value);
+    }
+
+    /**
      * @When /^I click the "(?P<element>[^"]*)" element$/
      *
      * @param string $element
