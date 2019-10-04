@@ -339,6 +339,58 @@ Scenario: I can login and then access to the admin dashboard
     And I should see "Welcome to the admin dashboard"
 ```
 
+### SonataPageAdminTrait
+
+This trait integrates [sonata-project/page-bundle][4] with some basics like interaction with container, block...
+You can combined it with the [ReloadCookiesTrait](#reloadcookiestrait) and with [RouterAwareTrait](#routerawaretrait) to use route ids.
+
+```php
+// your feature context
+
+namespace Tests\Behat\Context;
+
+use Behat\MinkExtension\Context\MinkContext;
+use Behat\Symfony2Extension\Context\KernelDictionary;
+use Ekino\BehatHelpers\SonataPageAdminTrait;
+
+class MyFeatureContext extends MinkContext
+{
+    use KernelDictionary;
+    use ReloadCookiesTrait;
+    use RouterAwareTrait;
+    use SonataPageAdminTrait;
+}
+```
+
+```gherkin
+Scenario: I can see "Simple text block" when I add a SimpleTextBlockService
+Given     I login
+Then      I am on "admin_app_sonata_page_compose;id=1"
+And       I open the container by text "Content"
+And       I add the block "Simple text" with the name "Foo"
+And       I open the block "Foo"
+And       The block "Foo" should be opened
+And       I rename the block "Foo" with "Bar"
+And       I submit the block "Foo"
+And       The block "Bar" should be closed
+And       I should see 1 blocks
+And       I delete the block "Bar"
+```
+
+| Step | Regex |
+| --- | --- |
+| I open the container by text "Content" | `/^I open the container "([^"]*)"$/` |
+| I add the block "Simple text" with the name "Foo" | `/^I add the block "([^"]*)" with the name "([^"]*)"$/` |
+| I go to the tab "English" of the block "Foo" | `/^I go to the tab "([^"]*)" of the block "([^"]*)"$/` |
+| I should see 6 blocks | `/^I should see (\d+) blocks$/` |
+| I open the block "Foo" | `/^I open the block "([^"]*)"$/` |
+| I submit the block "Foo" | `/^I submit the block "([^"]*)"$/` |
+| I delete the block "Foo" | `/^I delete the block "([^"]*)"$/` |
+| I rename the block "Foo" with "Bar" | `/^I rename the block "([^"]*)" with "([^"]*)"$/` |
+| The block "Foo" should be opened | `/^The block "([^"]*)" should be opened$/` |
+| The block "Foo" should be closed | `/^The block "([^"]*)" should be closed$/` |
+
 [1]: https://github.com/Behat/Symfony2Extension
 [2]: https://github.com/doctrine/DoctrineBundle
 [3]: https://github.com/sonata-project/SonataAdminBundle
+[4]: https://github.com/sonata-project/SonataPageBundle

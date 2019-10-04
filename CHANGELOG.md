@@ -4,7 +4,7 @@ CHANGELOG
 master
 ------
 
-* todo
+* Add helpers for sonata-project/page-bundle
 
 v0.1.1
 ------

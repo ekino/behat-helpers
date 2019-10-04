@@ -16,6 +16,7 @@ namespace Tests\Ekino\BehatHelpers;
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Behat\Mink\WebAssert;
 use Ekino\BehatHelpers\ExtraWebAssertTrait;
@@ -45,8 +46,6 @@ class ExtraWebAssertTraitTest extends TestCase
 
     /**
      * Asserts the method clickElement throws an exception if element not found.
-     *
-     * @expectedException \Behat\Mink\Exception\ElementNotFoundException
      */
     public function testClickElementThrowsExceptionIfElementNotFound(): void
     {
@@ -60,6 +59,8 @@ class ExtraWebAssertTraitTest extends TestCase
         /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+
+        $this->expectException(ElementNotFoundException::class);
 
         $mock->clickElement('.sonata-ba-list a.sonata-link-identifier');
     }
@@ -127,9 +128,6 @@ class ExtraWebAssertTraitTest extends TestCase
 
     /**
      * Tests the assertAtLeastNumElements method.
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage 1 ".foo" found on the page, but should at least 2.
      */
     public function testAssertAtLeastNumElementsNotEnough(): void
     {
@@ -145,14 +143,14 @@ class ExtraWebAssertTraitTest extends TestCase
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("1 \".foo\" found on the page, but should at least 2.");
+
         $mock->assertAtLeastNumElements(2, '.foo');
     }
 
     /**
      * Tests the assertElementVisible method.
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage Element matching css ".foo" not found.
      */
     public function testAssertAtLeastNumElementsThrowsExceptionIfElementNotFound(): void
     {
@@ -166,6 +164,9 @@ class ExtraWebAssertTraitTest extends TestCase
         /** @var ExtraWebAssertTrait|MockObject $mock */
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Element matching css \".foo\" not found.");
 
         $mock->assertAtLeastNumElements(2, '.foo');
     }
@@ -192,9 +193,6 @@ class ExtraWebAssertTraitTest extends TestCase
 
     /**
      * Tests the assertExactlyNumElement method.
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage 1 ".foo" found on the page, but should find 2.
      */
     public function testAssertExactlyNumElementNotEnough(): void
     {
@@ -210,14 +208,14 @@ class ExtraWebAssertTraitTest extends TestCase
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("1 \".foo\" found on the page, but should find 2.");
+
         $mock->assertExactlyNumElement(2, '.foo');
     }
 
     /**
      * Tests the assertExactlyNumElement method.
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage 3 ".foo" found on the page, but should find 2.
      */
     public function testAssertExactlyNumElementTooMuch(): void
     {
@@ -233,14 +231,14 @@ class ExtraWebAssertTraitTest extends TestCase
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("3 \".foo\" found on the page, but should find 2.");
+
         $mock->assertExactlyNumElement(2, '.foo');
     }
 
     /**
      * Tests the assertExactlyNumElement method.
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage Element matching css ".foo" not found.
      */
     public function testAssertExactlyNumElementThrowsExceptionIfElementNotFound(): void
     {
@@ -255,7 +253,25 @@ class ExtraWebAssertTraitTest extends TestCase
         $mock = $this->getExtraWebAssertMock();
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage("Element matching css \".foo\" not found.");
+
         $mock->assertExactlyNumElement(2, '.foo');
+    }
+
+    /**
+     * Tests the elementAttributeNotContains method.
+     */
+    public function testElementAttributeNotContains(): void
+    {
+        $webAssert = $this->createMock(WebAssert::class);
+        $webAssert->expects($this->once())->method('elementAttributeNotContains')->with($this->equalTo('css'), $this->equalTo('foo'), $this->equalTo('bar'), $this->equalTo('value'));
+
+        /** @var ExtraWebAssertTrait|MockObject $mock */
+        $mock = $this->getExtraWebAssertMock();
+        $mock->expects($this->once())->method('assertSession')->willReturn($webAssert);
+
+        $mock->elementAttributeNotContains('foo', 'bar', 'value');
     }
 
     /**

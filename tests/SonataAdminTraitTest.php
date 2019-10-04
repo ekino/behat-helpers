@@ -16,10 +16,13 @@ namespace Tests\Ekino\BehatHelpers;
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementHtmlException;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Ekino\BehatHelpers\SonataAdminTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use WebDriver\Exception\ElementNotVisible;
 
 /**
  * @author Rémi Marseille <remi.marseille@ekino.com>
@@ -64,9 +67,6 @@ class SonataAdminTraitTest extends TestCase
 
     /**
      * Tests the iOpenMenuItemByText method with no element found.
-     *
-     * @expectedException Behat\Mink\Exception\ElementNotFoundException
-     * @expectedExceptionMessage Tag with text "foo" not found
      */
     public function testIOpenMenuItemByTextWithElementNotFound(): void
     {
@@ -81,14 +81,14 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
+        $this->expectException(ElementNotFoundException::class);
+        $this->expectExceptionMessage("Tag with text \"foo\" not found");
+
         $mock->iOpenMenuItemByText('foo');
     }
 
     /**
      * Tests the iShouldSeeActionInNavbar method with element not found.
-     *
-     * @expectedException Behat\Mink\Exception\ElementNotFoundException
-     * @expectedExceptionMessage Tag with text "foo" not found
      */
     public function testIShouldSeeActionInNavbarWithoutElementFound(): void
     {
@@ -103,14 +103,14 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
+        $this->expectException(ElementNotFoundException::class);
+        $this->expectExceptionMessage("Tag with text \"foo\" not found");
+
         $mock->iShouldSeeActionInNavbar('foo');
     }
 
     /**
      * Tests the iShouldSeeActionInNavbar method with element not visible.
-     *
-     * @expectedException WebDriver\Exception\ElementNotVisible
-     * @expectedExceptionMessage Cannot find action "foo" in Navbar action
      */
     public function testIShouldSeeActionInNavbarWithoutElementNotVisible(): void
     {
@@ -125,14 +125,14 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
+        $this->expectException(ElementNotVisible::class);
+        $this->expectExceptionMessage("Cannot find action \"foo\" in Navbar action");
+
         $mock->iShouldSeeActionInNavbar('foo');
     }
 
     /**
      * Tests the iShouldNotSeeActionInNavbar method with element.
-     *
-     * @expectedException Behat\Mink\Exception\ElementHtmlException
-     * @expectedExceptionMessage Action "foo" has been found in Navbar action
      */
     public function testIShouldNotSeeActionInNavbarWithElement(): void
     {
@@ -148,14 +148,14 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
+        $this->expectException(ElementHtmlException::class);
+        $this->expectExceptionMessage("Action \"foo\" has been found in Navbar action");
+
         $mock->iShouldNotSeeActionInNavbar('foo');
     }
 
     /**
      * Tests the iClickOnActionInNavbar method with element not found.
-     *
-     * @expectedException Behat\Mink\Exception\ElementNotFoundException
-     * @expectedExceptionMessage Tag with text "foo" not found
      */
     public function testIClickOnActionInNavbarWithoutElementFound(): void
     {
@@ -169,6 +169,9 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+
+        $this->expectException(ElementNotFoundException::class);
+        $this->expectExceptionMessage("Tag with text \"foo\" not found");
 
         $mock->iClickOnActionInNavbar('foo');
     }
@@ -194,35 +197,34 @@ class SonataAdminTraitTest extends TestCase
 
     /**
      * Tests the clickingOnElementShouldOpenPopin method.
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Please use the trait Ekino\BehatHelpers\ExtraSessionTrait in the class Trait_SonataAdminTrait
      */
     public function testClickingOnElementShouldOpenPopinWithoutExtraSessionTraitUse(): void
     {
         /** @var SonataAdminTrait|MockObject $mock */
         $mock = $this->getSonataAdminMock();
+
+        $this->expectExceptionMessage("Please use the trait Ekino\BehatHelpers\ExtraSessionTrait in the class Trait_SonataAdminTrait");
+        $this->expectException(\RuntimeException::class);
+
         $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
     }
 
     /**
      * Tests the thePopinShouldBeClosed method.
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Please use the trait Ekino\BehatHelpers\ExtraSessionTrait in the class Trait_SonataAdminTrait
      */
     public function testThePopinShouldBeClosedWithoutExtraSessionTraitUse(): void
     {
         /** @var SonataAdminTrait|MockObject $mock */
         $mock = $this->getSonataAdminMock();
+
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage("Please use the trait Ekino\BehatHelpers\ExtraSessionTrait in the class Trait_SonataAdminTrait");
+
         $mock->clickingOnElementShouldOpenPopin('foo', 'bar');
     }
 
     /**
      * Tests the thePopinShouldNotBeOpened method with element found and visible.
-     *
-     * @expectedException Behat\Mink\Exception\ElementHtmlException
-     * @expectedExceptionMessage Popin div.modal[id$=foo] was found and opened
      */
     public function testThePopinShouldNotBeOpenedWithOpenedPopin(): void
     {
@@ -238,6 +240,9 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
         $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+
+        $this->expectExceptionMessage("Popin div.modal[id$=foo] was found and opened");
+        $this->expectException(ElementHtmlException::class);
 
         $mock->thePopinShouldNotBeOpened('foo');
     }
@@ -280,9 +285,6 @@ class SonataAdminTraitTest extends TestCase
 
     /**
      * Tests the thePopinShouldBeOpened method with element found and invisible.
-     *
-     * @expectedException WebDriver\Exception\ElementNotVisible
-     * @expectedExceptionMessage Modal div.modal[id$=foo] should be opened and visible
      */
     public function testThePopinShouldBeOpenedWithInvisiblePopin(): void
     {
@@ -297,14 +299,14 @@ class SonataAdminTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
 
+        $this->expectExceptionMessage("Modal div.modal[id$=foo] should be opened and visible");
+        $this->expectException(ElementNotVisible::class);
+
         $mock->thePopinShouldBeOpened('foo');
     }
 
     /**
      * Tests the thePopinShouldBeOpened method without element found.
-     *
-     * @expectedException WebDriver\Exception\ElementNotVisible
-     * @expectedExceptionMessage Modal div.modal[id$=foo] should be opened and visible
      */
     public function testThePopinShouldBeOpenedWithoutPopin(): void
     {
@@ -316,6 +318,9 @@ class SonataAdminTraitTest extends TestCase
         $page->expects($this->once())->method('find')->with($this->equalTo('css'), $this->equalTo('div.modal[id$=foo]'))->willReturn(null);
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $mock->expects($this->once())->method('getSession')->willReturn($session);
+
+        $this->expectExceptionMessage("Modal div.modal[id$=foo] should be opened and visible");
+        $this->expectException(ElementNotVisible::class);
 
         $mock->thePopinShouldBeOpened('foo');
     }
