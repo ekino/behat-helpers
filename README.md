@@ -130,7 +130,7 @@ Scenario: foo elt should be visible in 2 seconds or less
 | I scroll to 123 and 987 | `/^I scroll to (\d+) and (\d+)?$/` |
 | I wait 3 seconds that page contains text "Foo" | `/^I wait (\d+) seconds that page contains text "([^"]*)"$/` |
 | I wait 3 seconds that page not contains text "Bar" | `/^I wait (\d+) seconds that page not contains text "([^"]*)"$/` |
-| I click on button containing "Foo" | `/^I click on (?:link`&#x7c;`button) containing "(?P<text>[^"]*)"$/` |
+| I click on button containing "Foo" | `/^I click on (?:link\|button) containing "(?P<text>[^"]*)"$/` |
 
 ### ExtraWebAssertTrait
 
@@ -152,9 +152,9 @@ class MyFeatureContext extends MinkContext
 
 | Step | Regex |
 | --- | --- |
-| the "Foo" element should have attribute "Bar" | `/^the "(?P<element>[^"]*)" element should have attribute "(?P<value>(?:[^"]|\\")*)"$/` |
+| the "Foo" element should have attribute "Bar" | `/^the "(?P<element>[^"]*)" element should have attribute "(?P<value>(?:[^"]\|\\")*)"$/` |
 | I click the "Foo" element| `/^I click the "(?P<element>[^"]*)" element$/` |
-| I should see at least 2 "Bar" elements | `/^(?:|I )should see at least (?P<num>\d+) "(?P<element>[^"]*)" elements?$/` |
+| I should see at least 2 "Bar" elements | `/^(?:\|I )should see at least (?P<num>\d+) "(?P<element>[^"]*)" elements?$/` |
 
 ### ReloadCookiesTrait
 
@@ -370,8 +370,8 @@ Scenario: I can login and then access to the admin dashboard
 | the popin "Foo" should be closed | `/^the popin "([^"]*)" should be closed$/` |
 | the popin "Foo" should not be opened | `/^the popin "([^"]*)" should not be opened$/` |
 | the popin "Foo" should be opened | `/^the popin "([^"]*)" should be opened$/` |
-| I set the select2 field "Foo" to "Bar" | `/^(?:`&#x7c;`I )set the select2 field "(?P<field>(?:[^"]`&#x7c;`\\")*)" to "(?P<textValues>(?:[^"]`&#x7c;`\\")*)"$/` |
-| I set the select2 value "Foo" for "Bar" | `/^(?:`&#x7c;`I )set the select2 value "(?P<textValues>(?:[^"]`&#x7c;`\\")*)" for "(?P<field>(?:[^"]`&#x7c;`\\")*)"$/` |
+| I set the select2 field "Foo" to "Bar" | `/^(?:\|I )set the select2 field "(?P<field>(?:[^"]\|\\")*)" to "(?P<textValues>(?:[^"]\|\\")*)"$/` |
+| I set the select2 value "Foo" for "Bar" | `/^(?:\|I )set the select2 value "(?P<textValues>(?:[^"]\|\\")*)" for "(?P<field>(?:[^"]\|\\")*)"$/` |
 
 
 ### SonataPageAdminTrait
