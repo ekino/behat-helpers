@@ -16,6 +16,7 @@ namespace Tests\Ekino\BehatHelpers;
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
 use Behat\MinkExtension\Context\RawMinkContext;
 use Ekino\BehatHelpers\ExtraSessionTrait;
@@ -98,11 +99,10 @@ class ExtraSessionTraitTest extends TestCase
 
     /**
      * Tests the iWaitForCssElementBeingVisible FAIL method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitForCssElementBeingVisibleFail(): void
     {
+        $this->expectException(\RuntimeException::class);
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
             ->method('wait')
@@ -136,11 +136,10 @@ class ExtraSessionTraitTest extends TestCase
 
     /**
      * Tests the iWaitForCssElementBeingInvisible FAIL method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitForCssElementBeingInvisibleFail(): void
     {
+        $this->expectException(\RuntimeException::class);
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
             ->method('wait')
@@ -179,11 +178,10 @@ class ExtraSessionTraitTest extends TestCase
 
     /**
      * Tests the method iWaitPageContains FAIL method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitPageContainsFail(): void
     {
+        $this->expectException(\RuntimeException::class);
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())
             ->method('waitFor')
@@ -227,11 +225,10 @@ class ExtraSessionTraitTest extends TestCase
 
     /**
      * Tests the method iWaitPageNotContains Fail method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitPageNotContainsFail(): void
     {
+        $this->expectException(\RuntimeException::class);
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())
             ->method('waitFor')
@@ -252,12 +249,11 @@ class ExtraSessionTraitTest extends TestCase
 
     /**
      * Asserts the method iClickOnText throws an exception if element not found.
-     *
-     * @expectedException \Behat\Mink\Exception\ElementNotFoundException
-     * @expectedExceptionMessage Text matching xpath "foo" not found.
      */
     public function testIClickOnTextThrowsExceptionIfElementNotFound(): void
     {
+        $this->expectException(ElementNotFoundException::class);
+        $this->expectExceptionMessage('Text matching xpath "foo" not found.');
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo("//*[contains(.,'foo')]"));
 

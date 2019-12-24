@@ -6,6 +6,7 @@ master
 
 * Add doc for all available steps
 * Add helpers for sonata-project/page-bundle
+* Upgrade phpunit to ^8.5
 
 v0.1.1
 ------

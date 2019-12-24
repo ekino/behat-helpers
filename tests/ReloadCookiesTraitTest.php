@@ -223,12 +223,11 @@ class ReloadCookiesTraitTest extends TestCase
 
     /**
      * Tests the assertDriverSupported method.
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Saving cookies only works with driver Behat\Mink\Driver\Selenium2Driver
      */
     public function testAssertDriverSupportedWithException(): void
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Saving cookies only works with driver Behat\Mink\Driver\Selenium2Driver');
         $driver = $this->createMock(CoreDriver::class);
 
         $session = $this->createMock(Session::class);
