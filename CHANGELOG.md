@@ -4,6 +4,9 @@ CHANGELOG
 master
 ------
 
+v0.2.0
+------
+
 * Add doc for all available steps
 * Add helpers for sonata-project/page-bundle
 
