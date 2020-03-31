@@ -46,6 +46,11 @@ trait RouterAwareTrait
             $url = $path;
         }
 
+        // remove host added by router when host is specified in route definition
+        if (preg_match('#^(https?:)?(//)?([^/]+)(.*)$#', $url, $matches)) {
+            $url = $matches[4] ?? $url;
+        }
+
         $locatedPath = parent::locatePath($url);
 
         // add logs, captured by Behat

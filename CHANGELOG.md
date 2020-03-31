@@ -4,6 +4,8 @@ CHANGELOG
 master
 ------
 
+* Fix RouterAwareTrait for route with host restriction
+
 v0.2.0
 ------
 
