@@ -5,6 +5,7 @@ master
 ------
 
 * Fix RouterAwareTrait for route with host restriction
+* Switch to the new security checker
 
 v0.2.0
 ------
