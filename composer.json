@@ -25,8 +25,7 @@
         "friendsofphp/php-cs-fixer":   "^2.13",
         "ekino/phpstan-banned-code":   "^0.1",
         "phpstan/phpstan":             "^0.11",
-        "phpstan/phpstan-phpunit":     "^0.11",
-        "sensiolabs/security-checker": "^5.0"
+        "phpstan/phpstan-phpunit":     "^0.11"
     },
     "autoload": {
         "psr-4": {
