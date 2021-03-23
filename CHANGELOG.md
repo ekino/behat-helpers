@@ -6,6 +6,7 @@ master
 
 * Fix RouterAwareTrait for route with host restriction
 * Switch to the new security checker
+* Bump dependencies to allow SF5 and disallow SF2
 
 v0.2.0
 ------
