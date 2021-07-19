@@ -6,6 +6,7 @@ master
 
 * Fix RouterAwareTrait for route with host restriction
 * Switch to the new security checker
+* PHP8 is authorized
 
 v0.2.0
 ------

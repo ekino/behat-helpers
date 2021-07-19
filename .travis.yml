@@ -8,6 +8,10 @@ php:
   - '7.1'
   - '7.2'
   - '7.3'
+  - '7.4'
+  - '8.0.0'
+  - '8.0.1'
+  - '8.0.2'
 
 dist: trusty
 sudo: false
@@ -39,21 +43,37 @@ matrix:
     - php: '7.1'
       env: SYMFONY_DEPRECATIONS_HELPER=0
     - php: '7.1'
-      env: SYMFONY=^4.2
+      env: SYMFONY=^4.4
     - php: '7.2'
-      env: SYMFONY=^4.2
+      env: SYMFONY=^4.4
     - php: '7.3'
-      env: SYMFONY=^4.2
+      env: SYMFONY=^4.4
+    - php: '7.4'
+      env: SYMFONY=^4.4
+    - php: '8.0.0'
+      env: SYMFONY=^4.4
+    - php: '8.0.1'
+      env: SYMFONY=^4.4
+    - php: '8.0.2'
+      env: SYMFONY=^4.4
   allow_failures:
     - php: nightly
     - php: '7.3'
     - env: SYMFONY_DEPRECATIONS_HELPER=0
     - php: '7.1'
-      env: SYMFONY=^4.2
+      env: SYMFONY=^4.4
     - php: '7.2'
-      env: SYMFONY=^4.2
+      env: SYMFONY=^4.4
     - php: '7.3'
-      env: SYMFONY=^4.2
+      env: SYMFONY=^4.4
+    - php: '7.4'
+      env: SYMFONY=^4.4
+    - php: '8.0.0'
+      env: SYMFONY=^4.4
+    - php: '8.0.1'
+      env: SYMFONY=^4.4
+    - php: '8.0.2'
+      env: SYMFONY=^4.4
 
 before_install:
   - composer self-update
