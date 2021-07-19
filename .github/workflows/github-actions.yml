@@ -1,0 +1,47 @@
+name: github-actions
+on: [push, pull_request]
+jobs:
+  PHP71:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.1'
+          tools: composer
+      - run: make app-install
+      - run: make ci
+  PHP72:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.2'
+          tools: composer
+      - run: make app-install
+      - run: make ci
+  PHP73:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.3'
+          tools: composer
+      - run: make app-install
+      - run: make ci
+  PHP74:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+          tools: composer
+      - run: make app-install
+      - run: make ci
