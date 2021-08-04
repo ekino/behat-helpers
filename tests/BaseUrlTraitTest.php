@@ -40,9 +40,9 @@ class BaseUrlTraitTest extends TestCase
 
         $scope = new BeforeScenarioScope($env, $this->createMock(FeatureNode::class), $this->createMock(ScenarioInterface::class));
 
-        /** @var BaseUrlTrait $mock */
-        $mock = $this->getMockForTrait(BaseUrlTrait::class);
-        $mock->setBaseUrl('https://foo.bar');
-        $mock->setBaseUrlBeforeScenario($scope);
+        $trait = $this->getMockForTrait(BaseUrlTrait::class);
+
+        $trait->setBaseUrl('https://foo.bar'); // @phpstan-ignore-line
+        $trait->setBaseUrlBeforeScenario($scope); // @phpstan-ignore-line
     }
 }

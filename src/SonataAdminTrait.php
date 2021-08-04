@@ -128,7 +128,10 @@ trait SonataAdminTrait
      */
     public function clickingOnElementShouldOpenPopin(string $element, string $popinIdEnding): void
     {
-        if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
+        /** @var array<string> $traits */
+        $traits = class_uses($this);
+
+        if (!\in_array(ExtraSessionTrait::class, $traits)) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
@@ -148,7 +151,10 @@ trait SonataAdminTrait
      */
     public function thePopinShouldBeClosed(string $popinIdEnding): void
     {
-        if (!\in_array(ExtraSessionTrait::class, class_uses($this))) {
+        /** @var array<string> $traits */
+        $traits = class_uses($this);
+
+        if (!\in_array(ExtraSessionTrait::class, $traits)) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', ExtraSessionTrait::class, __CLASS__));
         }
 
@@ -218,7 +224,10 @@ trait SonataAdminTrait
         $page   = $this->getSession()->getPage();
         $values = [];
 
-        foreach (preg_split('/,\s*/', $textValues) as $value) {
+        /** @var array<string> $arrayTextValues */
+        $arrayTextValues = preg_split('/,\s*/', $textValues);
+
+        foreach ($arrayTextValues as $value) {
             $option   = $page->find('xpath', sprintf('//select[@id="%s"]//option[text()="%s"]', $field, $value));
             $values[] = $option->getAttribute('value');
         }

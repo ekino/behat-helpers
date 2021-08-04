@@ -23,9 +23,9 @@ trait TestHelperTrait
     /**
      * Call protected/private method of a class.
      *
-     * @param mixed  $object     Instancied object that will return on method on
-     * @param string $methodName Method name to call
-     * @param array  $parameters Array of parameters to pass into method
+     * @param mixed         $object     Instancied object that will return on method on
+     * @param string        $methodName Method name to call
+     * @param array<mixed>  $parameters Array of parameters to pass into method
      *
      * @throws \ReflectionException
      *

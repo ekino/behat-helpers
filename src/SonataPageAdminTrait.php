@@ -241,7 +241,7 @@ trait SonataPageAdminTrait
         $input = $this->getSession()->getPage()->find('css', $element);
 
         if (null === $input) {
-            throw new ElementNotFoundException($this->getSession()->getDriver(), null, 'input', $block);
+            throw new ElementNotFoundException($this->getSession()->getDriver(), null, 'input', $oldName);
         }
 
         $input->setValue($newName);

@@ -2,16 +2,27 @@ includes:
 	- vendor/phpstan/phpstan-phpunit/extension.neon
 	- vendor/phpstan/phpstan-phpunit/rules.neon
 
+parametersSchema:
+	banned_code: structure([
+		nodes: arrayOf(structure([
+			type: string()
+			functions: schema(arrayOf(string()), nullable())
+		]))
+		use_from_tests: bool()
+	])
+
 parameters:
 	banned_code:
 		nodes:
 			# enable detection of eval
 			-
 				type: Expr_Eval
+				functions:
 
 			# enable detection of die/exit
 			-
 				type: Expr_Exit
+				functions:
 
 			# enable detection of a set of functions
 			-
@@ -32,11 +43,11 @@ parameters:
 
 services:
 	-
-		class: Ekino\PHPStanBannedCode\Rules\BannedNodesRule(%banned_code.nodes%)
+		factory: Ekino\PHPStanBannedCode\Rules\BannedNodesRule(%banned_code.nodes%)
 		tags:
 			- phpstan.rules.rule
 
 	-
-		class: Ekino\PHPStanBannedCode\Rules\BannedUseTestRule(%banned_code.use_from_tests%)
+		factory: Ekino\PHPStanBannedCode\Rules\BannedUseTestRule(%banned_code.use_from_tests%)
 		tags:
 			- phpstan.rules.rule

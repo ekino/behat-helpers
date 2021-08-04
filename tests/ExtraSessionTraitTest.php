@@ -16,8 +16,8 @@ namespace Tests\Ekino\BehatHelpers;
 use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Behat\MinkExtension\Context\RawMinkContext;
 use Ekino\BehatHelpers\ExtraSessionTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -41,11 +41,10 @@ class ExtraSessionTraitTest extends TestCase
         $driver->expects($this->once())->method('maximizeWindow');
         $session->expects($this->once())->method('getDriver')->willReturn($driver);
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->maximizeWindowOnBeforeScenario();
+        $trait->maximizeWindowOnBeforeScenario(); // @phpstan-ignore-line
     }
 
     /**
@@ -56,11 +55,10 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('executeScript')->with($this->equalTo('(function(){window.scrollTo(0, 10);})();'));
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->scrollTo(0, 10);
+        $trait->scrollTo(0, 10); // @phpstan-ignore-line
     }
 
     /**
@@ -71,11 +69,10 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('wait')->with($this->equalTo(1000));
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->waitForSeconds(1);
+        $trait->waitForSeconds(1); // @phpstan-ignore-line
     }
 
     /**
@@ -90,19 +87,19 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(true)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitForCssElementBeingVisible('foo', 2);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitForCssElementBeingVisible('foo', 2); // @phpstan-ignore-line
     }
 
     /**
      * Tests the iWaitForCssElementBeingVisible FAIL method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitForCssElementBeingVisibleFail(): void
     {
+        $this->expectException(\RuntimeException::class);
+
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
             ->method('wait')
@@ -110,10 +107,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(false)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitForCssElementBeingVisible('foo', 2);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitForCssElementBeingVisible('foo', 2); // @phpstan-ignore-line
     }
 
     /**
@@ -128,19 +125,19 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(true)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitForCssElementBeingInvisible('foo', 2);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitForCssElementBeingInvisible('foo', 2); // @phpstan-ignore-line
     }
 
     /**
      * Tests the iWaitForCssElementBeingInvisible FAIL method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitForCssElementBeingInvisibleFail(): void
     {
+        $this->expectException(\RuntimeException::class);
+
         $session = $this->createMock(Session::class);
         $session->expects($this->once())
             ->method('wait')
@@ -148,10 +145,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn(false)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitForCssElementBeingInvisible('foo', 2);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitForCssElementBeingInvisible('foo', 2); // @phpstan-ignore-line
     }
 
     /**
@@ -171,19 +168,19 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageContains(2, 'foo');
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitPageContains(2, 'foo'); // @phpstan-ignore-line
     }
 
     /**
      * Tests the method iWaitPageContains FAIL method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitPageContainsFail(): void
     {
+        $this->expectException(\RuntimeException::class);
+
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())
             ->method('waitFor')
@@ -196,10 +193,10 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageContains(2, 'foo');
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitPageContains(2, 'foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -219,19 +216,19 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageNotContains(2, 'foo');
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitPageNotContains(2, 'foo'); // @phpstan-ignore-line
     }
 
     /**
      * Tests the method iWaitPageNotContains Fail method.
-     *
-     * @expectedException \RuntimeException
      */
     public function testIWaitPageNotContainsFail(): void
     {
+        $this->expectException(\RuntimeException::class);
+
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())
             ->method('waitFor')
@@ -244,20 +241,20 @@ class ExtraSessionTraitTest extends TestCase
             ->willReturn($page)
         ;
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
-        $mock->iWaitPageNotContains(2, 'foo');
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
+
+        $trait->iWaitPageNotContains(2, 'foo'); // @phpstan-ignore-line
     }
 
     /**
      * Asserts the method iClickOnText throws an exception if element not found.
-     *
-     * @expectedException \Behat\Mink\Exception\ElementNotFoundException
-     * @expectedExceptionMessage Text matching xpath "foo" not found.
      */
     public function testIClickOnTextThrowsExceptionIfElementNotFound(): void
     {
+        $this->expectException(ElementNotFoundException::class);
+        $this->expectExceptionMessage('Text matching xpath "foo" not found');
+
         $page = $this->createMock(DocumentElement::class);
         $page->expects($this->once())->method('find')->with($this->equalTo('xpath'), $this->equalTo("//*[contains(.,'foo')]"));
 
@@ -265,11 +262,10 @@ class ExtraSessionTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
-        $mock->iClickOnText('foo');
+        $trait->iClickOnText('foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -286,11 +282,10 @@ class ExtraSessionTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraSessionTrait|MockObject $mock */
-        $mock = $this->getExtraSessionMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraSessionMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->iClickOnText('foo');
+        $trait->iClickOnText('foo'); // @phpstan-ignore-line
     }
 
     /**

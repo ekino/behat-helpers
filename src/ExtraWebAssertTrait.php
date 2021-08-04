@@ -81,7 +81,7 @@ trait ExtraWebAssertTrait
     {
         $elements = $this->getSession()->getPage()->findAll('css', $selector);
 
-        if (null === $elements) {
+        if (!$elements) {
             throw new ElementNotFoundException($this->getSession()->getDriver(), 'element', 'css', $selector);
         }
 
@@ -109,7 +109,7 @@ trait ExtraWebAssertTrait
     {
         $elements = $this->getSession()->getPage()->findAll('css', $selector);
 
-        if (null === $elements) {
+        if (!$elements) {
             throw new ElementNotFoundException($this->getSession()->getDriver(), 'element', 'css', $selector);
         }
 

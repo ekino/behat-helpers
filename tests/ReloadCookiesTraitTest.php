@@ -34,20 +34,20 @@ class ReloadCookiesTraitTest extends TestCase
     /**
      * Test the doOnce method.
      *
-     * @param array $tags
-     * @param array $expectedCookies
-     * @param array $cookies
-     * @param array $expectedSteps
-     * @param array $steps
-     * @param int   $resetCounter
-     * @param int   $sessionCounter
-     * @param int   $driverCounter
+     * @param array<mixed> $tags
+     * @param array<mixed> $expectedCookies
+     * @param array<mixed> $cookies
+     * @param array<mixed> $expectedSteps
+     * @param array<mixed> $steps
+     * @param int          $resetCounter
+     * @param int          $sessionCounter
+     * @param int          $driverCounter
      *
      * @dataProvider doOnceProvider
      *
      * @throws \ReflectionException
      */
-    public function testDoOnce(array $tags, array $expectedCookies, array $cookies, array $expectedSteps, array $steps, int $resetCounter, int $sessionCounter, int $driverCounter)
+    public function testDoOnce(array $tags, array $expectedCookies, array $cookies, array $expectedSteps, array $steps, int $resetCounter, int $sessionCounter, int $driverCounter): void
     {
         $wdSession = $this->createMock(SessionMockInterface::class);
         $wdSession->expects($this->exactly($resetCounter))->method('deleteAllCookies');
@@ -74,7 +74,7 @@ class ReloadCookiesTraitTest extends TestCase
     }
 
     /**
-     * @return \Generator
+     * @return \Generator<mixed>
      */
     public function doOnceProvider(): \Generator
     {
@@ -223,12 +223,12 @@ class ReloadCookiesTraitTest extends TestCase
 
     /**
      * Tests the assertDriverSupported method.
-     *
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Saving cookies only works with driver Behat\Mink\Driver\Selenium2Driver
      */
     public function testAssertDriverSupportedWithException(): void
     {
+        $this->expectException(\RuntimeException::class);
+        $this->expectExceptionMessage('Saving cookies only works with driver Behat\Mink\Driver\Selenium2Driver');
+
         $driver = $this->createMock(CoreDriver::class);
 
         $session = $this->createMock(Session::class);

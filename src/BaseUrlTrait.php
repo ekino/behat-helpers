@@ -45,7 +45,10 @@ trait BaseUrlTrait
      */
     public function setBaseUrlBeforeScenario(BeforeScenarioScope $scope): void
     {
-        foreach ($scope->getEnvironment()->getContexts() as $context) {
+        /** @var \Behat\Behat\Context\Environment\InitializedContextEnvironment $env */
+        $env = $scope->getEnvironment();
+
+        foreach ($env->getContexts() as $context) {
             if ($context instanceof RawMinkContext) {
                 $context->setMinkParameter('base_url', $this->baseUrl);
             }

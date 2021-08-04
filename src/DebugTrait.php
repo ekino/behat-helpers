@@ -88,7 +88,9 @@ trait DebugTrait
             return;
         }
 
-        if (!\in_array(KernelDictionary::class, class_uses($this))) {
+        /** @var array<string> $traits */
+        $traits = class_uses($this);
+        if (!\in_array(KernelDictionary::class, $traits)) {
             throw new \RuntimeException(sprintf('Please use the trait %s in the class %s', KernelDictionary::class, __CLASS__));
         }
 
