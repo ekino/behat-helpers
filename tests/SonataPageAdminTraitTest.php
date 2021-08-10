@@ -96,7 +96,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIOpenTheContainerByText(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->element->expects($this->once())->method('click');
@@ -109,7 +108,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->once())->method('getSession')->willReturn($this->session);
 
-        $trait->iOpenTheContainerByText("Content");
+        $trait->iOpenTheContainerByText("Content"); // @phpstan-ignore-line
     }
 
     /**
@@ -117,7 +116,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIOpenTheContainerByTextNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())
@@ -131,7 +129,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag with text \"Content\" not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iOpenTheContainerByText("Content");
+        $trait->iOpenTheContainerByText("Content"); // @phpstan-ignore-line
     }
 
     /**
@@ -139,7 +137,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIAddABlockWithTheName(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->button->expects($this->once())->method('click');
@@ -163,7 +160,7 @@ class SonataPageAdminTraitTest extends TestCase
         $trait->expects($this->exactly(3))->method('iWaitForCssElementBeingVisible');
         $trait->expects($this->exactly(1))->method('clickingOnElementShouldOpenPopin')->with('div.page-composer__block-type-selector button', 'blockSelectModal');
 
-        $trait->iAddABlockWithTheName("Simple text", "Foo");
+        $trait->iAddABlockWithTheName("Simple text", "Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -171,7 +168,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIAddABlockWithTheNameButtonNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $trait->expects($this->at(0))
@@ -192,7 +188,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag with block \"Simple text\" not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iAddABlockWithTheName("Simple text", "Foo");
+        $trait->iAddABlockWithTheName("Simple text", "Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -200,7 +196,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIAddBlockWithTheNameBlockNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->button->expects($this->once())->method('click');
@@ -224,7 +219,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag with input \"Simple text\" not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iAddABlockWithTheName("Simple text", "Foo");
+        $trait->iAddABlockWithTheName("Simple text", "Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -232,7 +227,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIAddBlockWithTheNameInputNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->button->expects($this->once())->method('click');
@@ -256,7 +250,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag with input \"Simple text\" not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iAddABlockWithTheName("Simple text", "Foo");
+        $trait->iAddABlockWithTheName("Simple text", "Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -264,7 +258,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIGoToTheTabOfTheBlock(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->tab->expects($this->once())->method('click');
@@ -276,7 +269,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->any())->method('getSession')->willReturn($this->session);
 
-        $trait->iGoToTheTabOfTheBlock("English", "Foo");
+        $trait->iGoToTheTabOfTheBlock("English", "Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -284,7 +277,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIGoToTheTabOfTheBlockNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->tab->expects($this->never())->method('click');
@@ -299,7 +291,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iGoToTheTabOfTheBlock("English", "Foo");
+        $trait->iGoToTheTabOfTheBlock("English", "Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -307,7 +299,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIShouldSeeBlocks(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())->method('find')
@@ -319,7 +310,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->once())->method('getSession')->willReturn($this->session);
 
-        $trait->iShouldSeeBlocks(1);
+        $trait->iShouldSeeBlocks(1); // @phpstan-ignore-line
     }
 
     /**
@@ -327,7 +318,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIShouldSeeBlocksElementNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())->method('find')
@@ -341,7 +331,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iShouldSeeBlocks(1);
+        $trait->iShouldSeeBlocks(1); // @phpstan-ignore-line
     }
 
     /**
@@ -349,7 +339,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIOpenTheBlock(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $trait->expects($this->once())
@@ -365,7 +354,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->once())->method('getSession')->willReturn($this->session);
 
-        $trait->iOpenTheBlock("Foo");
+        $trait->iOpenTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -373,7 +362,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIOpenTheBlockNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())->method('find')
@@ -387,7 +375,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iOpenTheBlock("Foo");
+        $trait->iOpenTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -395,7 +383,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testISubmitTheBlock(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->block->expects($this->once())->method('press');
@@ -407,7 +394,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->once())->method('getSession')->willReturn($this->session);
 
-        $trait->iSubmitTheBlock("Foo");
+        $trait->iSubmitTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -415,7 +402,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testISubmitTheBlockNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())->method('find')
@@ -429,7 +415,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iSubmitTheBlock("Foo");
+        $trait->iSubmitTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -437,7 +423,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIDeleteTheBlock(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->at(0))
@@ -469,7 +454,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->exactly(4))->method('getPage')->willReturn($this->page);
         $trait->expects($this->exactly(5))->method('getSession')->willReturn($this->session);
 
-        $trait->iDeleteTheBlock("Foo");
+        $trait->iDeleteTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -477,7 +462,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIDeleteTheBlockElementNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->at(0))
@@ -491,7 +475,8 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getDriver')->willReturn($this->driver);
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->exactly(2))->method('getSession')->willReturn($this->session);
-        $trait->iDeleteTheBlock("Foo");
+
+        $trait->iDeleteTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -499,7 +484,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIDeleteTheBlockButtonNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->at(0))
@@ -525,7 +509,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->exactly(3))->method('getPage')->willReturn($this->page);
         $trait->expects($this->exactly(4))->method('getSession')->willReturn($this->session);
 
-        $trait->iDeleteTheBlock("Foo");
+        $trait->iDeleteTheBlock("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -533,7 +517,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIRenameTheBlock(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $trait->expects($this->at(0))
@@ -568,7 +551,8 @@ class SonataPageAdminTraitTest extends TestCase
 
         $this->session->expects($this->exactly(4))->method('getPage')->willReturn($this->page);
         $trait->expects($this->exactly(4))->method('getSession')->willReturn($this->session);
-        $trait->iRenameTheBlock("Foo", "Bar");
+
+        $trait->iRenameTheBlock("Foo", "Bar"); // @phpstan-ignore-line
     }
 
     /**
@@ -576,7 +560,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testIRenameTheBlockInputNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->at(0))
@@ -591,7 +574,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->iRenameTheBlock("Foo", "Bar");
+        $trait->iRenameTheBlock("Foo", "Bar"); // @phpstan-ignore-line
     }
 
     /**
@@ -599,7 +582,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testTheBlockShouldBeOpened(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())
@@ -619,7 +601,7 @@ class SonataPageAdminTraitTest extends TestCase
 
         $trait->expects($this->once())->method('assertSession')->willReturn($this->webAssert);
 
-        $trait->theBlockShouldBeOpened("Foo");
+        $trait->theBlockShouldBeOpened("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -627,7 +609,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testTheBlockShouldBeOpenedNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $this->page->expects($this->once())
@@ -642,7 +623,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->theBlockShouldBeOpened("Foo");
+        $trait->theBlockShouldBeOpened("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -650,7 +631,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testTheBlockShouldBeClosed(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $trait->expects($this->once())->method('iWaitForCssElementBeingVisible')->with('li.page-composer__container__child:contains(\'Foo\')');
@@ -669,7 +649,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->session->expects($this->once())->method('getPage')->willReturn($this->page);
         $trait->expects($this->once())->method('getSession')->willReturn($this->session);
 
-        $trait->theBlockShouldBeClosed("Foo");
+        $trait->theBlockShouldBeClosed("Foo"); // @phpstan-ignore-line
     }
 
     /**
@@ -677,7 +657,6 @@ class SonataPageAdminTraitTest extends TestCase
      */
     public function testTheBlockShouldBeClosedNotFound(): void
     {
-        /** @var SonataPageAdminTrait|MockObject $trait */
         $trait = $this->getSonataPageAdminTraitMock();
 
         $trait->expects($this->once())->method('iWaitForCssElementBeingVisible')->with($this->equalTo('li.page-composer__container__child:contains(\'Foo\')'));
@@ -694,7 +673,7 @@ class SonataPageAdminTraitTest extends TestCase
         $this->expectExceptionMessage("Tag not found.");
         $this->expectException(ElementNotFoundException::class);
 
-        $trait->theBlockShouldBeClosed("Foo");
+        $trait->theBlockShouldBeClosed("Foo"); // @phpstan-ignore-line
     }
 
     /**

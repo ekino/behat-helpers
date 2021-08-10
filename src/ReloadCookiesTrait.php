@@ -23,12 +23,12 @@ use Behat\Mink\Driver\Selenium2Driver;
 trait ReloadCookiesTrait
 {
     /**
-     * @var array
+     * @var array<mixed>
      */
     private static $steps = [];
 
     /**
-     * @var array
+     * @var array<mixed>
      */
     private static $cookies = [];
 

@@ -36,12 +36,11 @@ class ExtraWebAssertTraitTest extends TestCase
         $webAssert = $this->createMock(WebAssert::class);
         $webAssert->expects($this->once())->method('elementAttributeExists')->with($this->equalTo('css'), $this->equalTo('a.action_bar__next'));
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('assertSession')->willReturn($webAssert);
-        $mock->expects($this->once())->method('fixStepArgument')->with($this->equalTo('disabled'));
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('assertSession')->willReturn($webAssert);
+        $trait->expects($this->once())->method('fixStepArgument')->with($this->equalTo('disabled'));
 
-        $mock->assertElementAttributeExists('a.action_bar__next', 'disabled');
+        $trait->assertElementAttributeExists('a.action_bar__next', 'disabled'); // @phpstan-ignore-line
     }
 
     /**
@@ -56,13 +55,12 @@ class ExtraWebAssertTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
         $this->expectException(ElementNotFoundException::class);
 
-        $mock->clickElement('.sonata-ba-list a.sonata-link-identifier');
+        $trait->clickElement('.sonata-ba-list a.sonata-link-identifier'); // @phpstan-ignore-line
     }
 
     /**
@@ -79,11 +77,10 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->clickElement('.sonata-ba-list a.sonata-link-identifier');
+        $trait->clickElement('.sonata-ba-list a.sonata-link-identifier'); // @phpstan-ignore-line
     }
 
     /**
@@ -99,11 +96,10 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->assertAtLeastNumElements(2, '.foo');
+        $trait->assertAtLeastNumElements(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -119,11 +115,10 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->assertAtLeastNumElements(2, '.foo');
+        $trait->assertAtLeastNumElements(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -139,14 +134,13 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("1 \".foo\" found on the page, but should at least 2.");
 
-        $mock->assertAtLeastNumElements(2, '.foo');
+        $trait->assertAtLeastNumElements(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -161,14 +155,13 @@ class ExtraWebAssertTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Element matching css \".foo\" not found.");
 
-        $mock->assertAtLeastNumElements(2, '.foo');
+        $trait->assertAtLeastNumElements(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -184,11 +177,10 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
-        $mock->assertExactlyNumElement(2, '.foo');
+        $trait->assertExactlyNumElement(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -204,14 +196,13 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("1 \".foo\" found on the page, but should find 2.");
 
-        $mock->assertExactlyNumElement(2, '.foo');
+        $trait->assertExactlyNumElement(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -227,14 +218,13 @@ class ExtraWebAssertTraitTest extends TestCase
         $session = $this->createMock(Session::class);
         $session->expects($this->once())->method('getPage')->willReturn($page);
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('getSession')->willReturn($session);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("3 \".foo\" found on the page, but should find 2.");
 
-        $mock->assertExactlyNumElement(2, '.foo');
+        $trait->assertExactlyNumElement(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -249,14 +239,13 @@ class ExtraWebAssertTraitTest extends TestCase
         $session->expects($this->once())->method('getPage')->willReturn($page);
         $session->expects($this->once())->method('getDriver')->willReturn($this->createMock(DriverInterface::class));
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->exactly(2))->method('getSession')->willReturn($session);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->exactly(2))->method('getSession')->willReturn($session);
 
         $this->expectException(\Exception::class);
         $this->expectExceptionMessage("Element matching css \".foo\" not found.");
 
-        $mock->assertExactlyNumElement(2, '.foo');
+        $trait->assertExactlyNumElement(2, '.foo'); // @phpstan-ignore-line
     }
 
     /**
@@ -267,11 +256,10 @@ class ExtraWebAssertTraitTest extends TestCase
         $webAssert = $this->createMock(WebAssert::class);
         $webAssert->expects($this->once())->method('elementAttributeNotContains')->with($this->equalTo('css'), $this->equalTo('foo'), $this->equalTo('bar'), $this->equalTo('value'));
 
-        /** @var ExtraWebAssertTrait|MockObject $mock */
-        $mock = $this->getExtraWebAssertMock();
-        $mock->expects($this->once())->method('assertSession')->willReturn($webAssert);
+        $trait = $this->getExtraWebAssertMock();
+        $trait->expects($this->once())->method('assertSession')->willReturn($webAssert);
 
-        $mock->elementAttributeNotContains('foo', 'bar', 'value');
+        $trait->elementAttributeNotContains('foo', 'bar', 'value'); // @phpstan-ignore-line
     }
 
     /**
