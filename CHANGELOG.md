@@ -4,8 +4,14 @@ CHANGELOG
 master
 ------
 
+* todo...
+
+v0.3.0
+------
+
 * Fix RouterAwareTrait for route with host restriction
 * Switch to the new security checker
+* Migrate from Travis to GitHub Actions
 * Drop support PHP7.1
 * Allow PHP8
 
