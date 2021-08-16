@@ -46,10 +46,7 @@ trait RouterAwareTrait
             $url = $path;
         }
 
-        // remove host added by router when host is specified in route definition
-        if (preg_match('#^(https?:)?(//)?([^/]+)(.*)$#', $url, $matches)) {
-            $url = $matches[4] ?? $url;
-        }
+        $url = $this->removeHost($url);
 
         $locatedPath = parent::locatePath($url);
 
@@ -57,5 +54,19 @@ trait RouterAwareTrait
         echo $locatedPath;
 
         return $locatedPath;
+    }
+
+    /**
+     * Remove host added by router when host is specified in route definition
+     */
+    private function removeHost(string $url): string
+    {
+        if (preg_match('#^(https?://)?([^/^?]+)(.*)$#', $url, $matches)) {
+            if ($matches[1] !== '') {
+                $url = $matches[3] ?? $url;
+            }
+        }
+
+        return $url;
     }
 }
