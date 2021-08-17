@@ -5,6 +5,7 @@ master
 ------
 
 * Fix deprecated PHP-CS rules
+* Improvement PHPStan configuration file
 
 v0.3.0
 ------
