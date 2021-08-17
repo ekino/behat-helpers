@@ -12,6 +12,11 @@ parametersSchema:
 	])
 
 parameters:
+	level: 8
+	paths:
+		- src
+		- tests
+
 	banned_code:
 		nodes:
 			# enable detection of eval
