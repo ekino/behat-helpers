@@ -6,6 +6,7 @@ master
 
 * Fix deprecated PHP-CS rules
 * Improvement PHPStan configuration file
+* Upgrade friendsofphp/php-cs-fixer
 
 v0.3.0
 ------
