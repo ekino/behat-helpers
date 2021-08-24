@@ -4,6 +4,12 @@ CHANGELOG
 master
 ------
 
+* todo...
+
+v0.3.1
+------
+
+* Fix absolute URL generation using Symfony router
 * Fix deprecated PHP-CS rules
 * Improvement PHPStan configuration file
 * Upgrade friendsofphp/php-cs-fixer
