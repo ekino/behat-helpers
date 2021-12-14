@@ -4,7 +4,7 @@ CHANGELOG
 master
 ------
 
-* todo...
+* Allow symfony/stopwatch ^5.0
 
 v0.3.1
 ------
