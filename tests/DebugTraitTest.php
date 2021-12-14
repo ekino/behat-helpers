@@ -86,7 +86,7 @@ class DebugTraitTest extends TestCase
 
         $context->startProfilingBeforeScenario($scope);
         $this->assertInstanceOf(Stopwatch::class, $this->getPrivatePropertyValue($context, 'stopwatch'));
-        $this->expectOutputRegex('/default: (.*) MiB - (.*) ms/');
+        $this->expectOutputRegex('#default(/scenario)?: (.*) MiB - (.*) ms#');
         $context->stopProfilingAfterScenario();
     }
 
